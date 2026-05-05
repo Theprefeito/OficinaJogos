@@ -16,9 +16,6 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.W))
-            {
-               rb.linearVelocity = new Vector2(rb.linearVelocity.x, speed);
-            }
+        
     }
 }
