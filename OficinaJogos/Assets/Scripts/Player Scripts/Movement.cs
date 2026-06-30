@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Essas duas linhas são momentanias, elas servem para travar o cursor
+        // Essas duas linhas sï¿½o momentanias, elas servem para travar o cursor
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
@@ -28,17 +28,18 @@ public class Movement : MonoBehaviour
     {
         //Cria o movimento
         Vector3 mover = new Vector3(direction.x, 0, direction.y);
-        // Converte o movimento para ser relativo à rotação do jogador
+        // Converte o movimento para ser relativo ï¿½ rotaï¿½ï¿½o do jogador
         Vector3 relativeMove = transform.TransformDirection(mover);
 
-        //Aplica o movimento usando a posição atual + o deslocamento relativo
+        //Aplica o movimento usando a posiï¿½ï¿½o atual + o deslocamento relativo
         rb.MovePosition(rb.position + relativeMove * speed * Time.fixedDeltaTime);
 
-        if (camPosition != null)
+       /* if (camPosition != null)
         {
             // Olha pra cam
             rb.transform.rotation = Quaternion.Euler(0, camPosition.eulerAngles.y, 0);
         }
+       */
     }
 
     public void Move(InputAction.CallbackContext context)
