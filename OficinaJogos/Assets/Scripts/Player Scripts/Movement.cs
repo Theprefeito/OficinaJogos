@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 public class Movement : MonoBehaviour
@@ -11,6 +12,7 @@ public class Movement : MonoBehaviour
     public float acceleration = 12f;
     public float deceleration = 10f;
     public float derrapadaDeceleration = 25f;
+    private Vector2 directionInput;
 
     [Tooltip("Velocidade de rotação básica quando o personagem está lento.")]
     public float baseTurnSpeed = 900f;
@@ -62,6 +64,11 @@ public class Movement : MonoBehaviour
     }
 
     #region Basic Movement
+    public void analogicMove(InputAction.CallbackContext context) //Serve pro novo Input System
+    {
+        directionInput = context.ReadValue<Vector2>();
+    }
+
     void BasicMovement()
     {
         if (isSideFlipping)
@@ -74,8 +81,7 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        float moveX = Input.GetAxisRaw("Horizontal"); //Define o movimento X
-        float moveZ = Input.GetAxisRaw("Vertical"); //Define o movimento Z
+        Vector3 direction = new Vector3(directionInput.x, 0f, directionInput.y).normalized; //Pega o input e transforma em movimento 3D
 
         Vector3 cameraForward = cameraTransform.forward; //Define o movimento Z da camera
         Vector3 cameraRight = cameraTransform.right; //Define o movimento X da camera
@@ -86,7 +92,7 @@ public class Movement : MonoBehaviour
         cameraForward.Normalize(); //Impede bug da verticalidade da camera, normalizando o vetor
         cameraRight.Normalize(); //Impede bug da verticalidade da camera, normalizando o vetor
 
-        Vector3 targetDir = (cameraForward * moveZ + cameraRight * moveX).normalized;
+        Vector3 targetDir = (cameraForward * direction.z + cameraRight * direction.x).normalized;
 
         if (targetDir.magnitude > 0.1f && controller.isGrounded)
         {
@@ -128,6 +134,8 @@ public class Movement : MonoBehaviour
     #endregion
 
     #region Jumping
+   
+
     void Jump()
     {
         // Se o personagem estiver no chão reseta o coyoteCounter e a velocidade vertical para um valor pequeno negativo para manter o personagem no chão

@@ -1456,7 +1456,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1905328965}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: Move
+        m_MethodName: analogicMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1504,7 +1504,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1905328965}
         m_TargetAssemblyTypeName: Movement, Assembly-CSharp
-        m_MethodName: Jump
+        m_MethodName: JumpInput
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
