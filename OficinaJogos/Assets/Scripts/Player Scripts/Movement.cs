@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour
     public float maxSpeed = 8f;
     public float acceleration = 12f;
     public float deceleration = 10f;
-    public float skiddingDeceleration = 25f;
+    public float derrapadaDeceleration = 25f;
 
     [Tooltip("Velocidade de rotação básica quando o personagem está lento.")]
     public float baseTurnSpeed = 900f;
@@ -24,12 +24,18 @@ public class Movement : MonoBehaviour
     public float sideFlipBackwardForce = 5f;
     public float gravity = 20f;
 
+    [Header("Coyote Time")]
+    [Tooltip("Tempo em segundos que o jogador ainda pode pular após sair do chão.")]
+    public float coyoteDuration = 0.3f;
+    private float coyoteCounter;
+
+    //Componentes
     private CharacterController controller;
     private Vector3 currentVelocity;
     private float verticalVelocity;
 
     // Estados
-    private bool isSkidding = false;
+    private bool derrapando = false;
     private bool isSideFlipping = false;
     private Vector3 sideFlipDirection;
 
@@ -37,8 +43,6 @@ public class Movement : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
 
-        // Caso a câmera não seja atribuída no Inspector,
-        // pega automaticamente a Main Camera.
         if (cameraTransform == null)
         {
             cameraTransform = Camera.main.transform;
@@ -50,18 +54,19 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        HandleMovement();
-        HandleGravityAndJump();
+        BasicMovement();
+        Jump();
 
         Vector3 finalMotion = currentVelocity + Vector3.up * verticalVelocity;
         controller.Move(finalMotion * Time.deltaTime);
     }
 
-    void HandleMovement()
+    #region Basic Movement
+    void BasicMovement()
     {
         if (isSideFlipping)
         {
-            if (controller.isGrounded)
+            if (controller.isGrounded) //Define se quando o jogador estiver no chão, ele não estará mais realizando o side flip
             {
                 isSideFlipping = false;
             }
@@ -69,109 +74,74 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        // Entrada do jogador
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveZ = Input.GetAxisRaw("Vertical");
+        float moveX = Input.GetAxisRaw("Horizontal"); //Define o movimento X
+        float moveZ = Input.GetAxisRaw("Vertical"); //Define o movimento Z
 
-        // Direções da câmera
-        Vector3 cameraForward = cameraTransform.forward;
-        Vector3 cameraRight = cameraTransform.right;
+        Vector3 cameraForward = cameraTransform.forward; //Define o movimento Z da camera
+        Vector3 cameraRight = cameraTransform.right; //Define o movimento X da camera
 
-        // Remove a inclinação da câmera
-        cameraForward.y = 0;
-        cameraRight.y = 0;
+        cameraForward.y = 0; //Trava o eixo Y
+        cameraRight.y = 0; //Trava o eixo Y
 
-        cameraForward.Normalize();
-        cameraRight.Normalize();
+        cameraForward.Normalize(); //Impede bug da verticalidade da camera, normalizando o vetor
+        cameraRight.Normalize(); //Impede bug da verticalidade da camera, normalizando o vetor
 
-        // Movimento relativo à câmera
         Vector3 targetDir = (cameraForward * moveZ + cameraRight * moveX).normalized;
 
-        // Verifica derrapagem
         if (targetDir.magnitude > 0.1f && controller.isGrounded)
         {
             float dotProduct = Vector3.Dot(currentVelocity.normalized, targetDir);
 
             if (dotProduct < -0.5f && currentVelocity.magnitude > (maxSpeed * 0.6f))
             {
-                isSkidding = true;
+                derrapando = true;
             }
         }
 
-        if (isSkidding)
+        if (derrapando) //Faz o derrapamento do personagem
         {
-            currentVelocity = Vector3.MoveTowards(
-                currentVelocity,
-                Vector3.zero,
-                skiddingDeceleration * Time.deltaTime);
+            currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, derrapadaDeceleration * Time.deltaTime); // Faz a desaceleração do personagem enquanto ele está derrapando
 
-            if (currentVelocity.magnitude < 0.5f)
+            if (currentVelocity.magnitude < 0.5f) //Quando a velocidade do personagem for menor que 0.5, ele não estará mais derrapando
             {
-                isSkidding = false;
+                derrapando = false;
             }
         }
         else if (targetDir.magnitude > 0.1f)
         {
             Vector3 targetVelocity = targetDir * maxSpeed;
 
-            currentVelocity = Vector3.MoveTowards(
-                currentVelocity,
-                targetVelocity,
-                acceleration * Time.deltaTime);
+            currentVelocity = Vector3.MoveTowards(currentVelocity, targetVelocity, acceleration * Time.deltaTime);
 
             float speedPercent = currentVelocity.magnitude / maxSpeed;
-            float currentTurnSpeed = Mathf.Lerp(
-                baseTurnSpeed,
-                minTurnSpeed,
-                speedPercent);
+            float currentTurnSpeed = Mathf.Lerp(baseTurnSpeed, minTurnSpeed, speedPercent);
 
             Quaternion targetRotation = Quaternion.LookRotation(targetDir);
 
-            transform.rotation = Quaternion.RotateTowards(
-                transform.rotation,
-                targetRotation,
-                currentTurnSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, currentTurnSpeed * Time.deltaTime);
         }
         else
         {
-            currentVelocity = Vector3.MoveTowards(
-                currentVelocity,
-                Vector3.zero,
-                deceleration * Time.deltaTime);
+            currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
         }
     }
+    #endregion
 
-    void HandleGravityAndJump()
+    #region Jumping
+    void Jump()
     {
+        // Se o personagem estiver no chão reseta o coyoteCounter e a velocidade vertical para um valor pequeno negativo para manter o personagem no chão
         if (controller.isGrounded)
         {
-            verticalVelocity = -0.5f;
-
-            if (Input.GetButtonDown("Jump"))
-            {
-                if (isSkidding)
-                {
-                    isSideFlipping = true;
-                    isSkidding = false;
-
-                    sideFlipDirection = -transform.forward;
-
-                    verticalVelocity = sideFlipJumpForce;
-                    currentVelocity = sideFlipDirection * sideFlipBackwardForce;
-
-                    transform.rotation = Quaternion.LookRotation(sideFlipDirection);
-                }
-                else
-                {
-                    verticalVelocity = jumpForce;
-                }
-            }
+            verticalVelocity = -0.5f; // Mantém o personagem no chão
+            coyoteCounter = coyoteDuration; // Resete
         }
-        else
+        else //Caso o evento anterior não aconteça
         {
-            verticalVelocity -= gravity * Time.deltaTime;
+            verticalVelocity -= gravity * Time.deltaTime; // Aplica a gravidade
+            coyoteCounter -= Time.deltaTime; // Define a tolerância do coyote time
 
-            if (isSideFlipping)
+            if (isSideFlipping) //Caso ele esteja realizando o side flip, aplica a força de recuo
             {
                 currentVelocity = Vector3.MoveTowards(
                     currentVelocity,
@@ -179,9 +149,33 @@ public class Movement : MonoBehaviour
                     Time.deltaTime * 2f);
             }
         }
+
+        // Apenas  a execução do Pulo
+        if (Input.GetButtonDown("Jump") && coyoteCounter > 0f)
+        {
+            if (derrapando)
+            {
+                isSideFlipping = true;
+                derrapando = false;
+
+                sideFlipDirection = -transform.forward;
+
+                verticalVelocity = sideFlipJumpForce;
+                currentVelocity = sideFlipDirection * sideFlipBackwardForce;
+
+                transform.rotation = Quaternion.LookRotation(sideFlipDirection);
+            }
+            else
+            {
+                verticalVelocity = jumpForce;
+            }
+
+            coyoteCounter = 0f; // Zera para evitar múltiplos pulos no ar dentro da mesma janela
+        }
     }
+    #endregion
 
-    public bool IsSideFlipping() => isSideFlipping;
+    public bool IsSideFlipping() => isSideFlipping; // Método público para verificar se o personagem está realizando um side flip
 
-    public bool IsSkidding() => isSkidding;
+    public bool Derrapando() => derrapando; // Método público para verificar se o personagem está derrapando
 }
