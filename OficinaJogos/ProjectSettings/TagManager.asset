@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Interagivel
+  - Grabable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
   - 

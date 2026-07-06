@@ -6,7 +6,7 @@ public class Player_Interactor : MonoBehaviour
     [Header("Configuracoes de Interacao")]
     public float interactionDistance = 3f;
     public bool canInteract = false;
-
+    public bool Cangrabable = false;
     
     [Header("Configuracoes de Grab")]
     [SerializeField] private Transform Hand;
@@ -47,17 +47,32 @@ public class Player_Interactor : MonoBehaviour
                 // Aqui voce pode adicionar a logica para interagir com o objeto
                 //Debug.Log("Objeto Interagivel Detectado: " + hit.collider.name);
             }
+         
+            else if (hit.collider.CompareTag("Grabable"))
+           {
+             
+               Cangrabable = true;
+           }
 
         }
         else
         {
             canInteract = false;
+            Cangrabable = false;
         }
     }
 
     public void InputInteract(InputAction.CallbackContext context) //Input para interagir com o objeto observado 
     {
-        if (context.performed && canInteract && !canDrop) //Adicionado Candrop na lógica para não pesar na memória devido a várias inoputs que podiam ocorrer indevidamente
+        if (context.performed && canInteract) 
+        {
+            // Aqui voce pode adicionar a logica para interagir com o objeto
+            
+            
+            Debug.Log("Interagindo com o objeto: " + hit.collider.name);
+        }
+     
+        else if (context.performed && Cangrabable && !canDrop) //Adicionado Candrop na lógica para não pesar na memória devido a várias inoputs que podiam ocorrer indevidamente
         {
             // Aqui voce pode adicionar a logica para interagir com o objeto
             
