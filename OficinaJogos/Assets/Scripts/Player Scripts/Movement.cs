@@ -44,7 +44,6 @@ public class Movement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
-
         if (cameraTransform == null)
         {
             cameraTransform = Camera.main.transform;
@@ -82,9 +81,9 @@ public class Movement : MonoBehaviour
         }
 
         Vector3 direction = new Vector3(directionInput.x, 0f, directionInput.y).normalized; //Pega o input e transforma em movimento 3D
-
         Vector3 cameraForward = cameraTransform.forward; //Define o movimento Z da camera
-        Vector3 cameraRight = cameraTransform.right; //Define o movimento X da camera
+        Vector3 cameraRight = cameraTransform.right; //Define o movimento X da 
+        
 
         cameraForward.y = 0; //Trava o eixo Y
         cameraRight.y = 0; //Trava o eixo Y
