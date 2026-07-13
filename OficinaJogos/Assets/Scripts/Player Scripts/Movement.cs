@@ -35,6 +35,7 @@ public class Movement : MonoBehaviour
     private CharacterController controller;
     private Vector3 currentVelocity;
     private float verticalVelocity;
+    private Player_AnimatorController animPlayer;
 
     // Estados
     private bool derrapando = false;
@@ -49,6 +50,7 @@ public class Movement : MonoBehaviour
             cameraTransform = Camera.main.transform;
         }
 
+        animPlayer = FindAnyObjectByType<Player_AnimatorController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -117,6 +119,7 @@ public class Movement : MonoBehaviour
             Vector3 targetVelocity = targetDir * maxSpeed;
 
             currentVelocity = Vector3.MoveTowards(currentVelocity, targetVelocity, acceleration * Time.deltaTime);
+            animPlayer.SetRunAnimationSpeed(currentVelocity.magnitude, maxSpeed);
 
             float speedPercent = currentVelocity.magnitude / maxSpeed;
             float currentTurnSpeed = Mathf.Lerp(baseTurnSpeed, minTurnSpeed, speedPercent);
@@ -128,6 +131,16 @@ public class Movement : MonoBehaviour
         else
         {
             currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
+            animPlayer.SetRunAnimationSpeed(currentVelocity.magnitude, maxSpeed);
+        }
+
+        if(controller.isGrounded && currentVelocity.magnitude > 0.1f)
+        {
+            animPlayer.currentState = Player_AnimatorController.AnimState.Run;
+        }
+        else
+        {
+            animPlayer.currentState = Player_AnimatorController.AnimState.Idle;
         }
     }
     #endregion
