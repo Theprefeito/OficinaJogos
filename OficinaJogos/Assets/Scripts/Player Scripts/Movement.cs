@@ -150,41 +150,44 @@ public class Movement : MonoBehaviour
     #endregion
 
     #region Jumping
-   
+
 
     void Jump()
     {
-        // Se o personagem estiver no chão reseta o coyoteCounter e a velocidade vertical para um valor pequeno negativo para manter o personagem no chão
+        // Se o personagem estiver no chão
         if (controller.isGrounded)
         {
-            verticalVelocity = -0.5f; // Mantém o personagem no chão
-            coyoteCounter = coyoteDuration; // Resete
+            // IMPORTANTE: Uma força gravitacional constante menor para garantir que ele permaneça colado ao chão
+            verticalVelocity = -2f;
+            coyoteCounter = coyoteDuration;
         }
-        else //Caso o evento anterior não aconteça
+        else
         {
-            animPlayer.currentState = Player_AnimatorController.AnimState.Jump;
-            verticalVelocity -= gravity * Time.deltaTime; // Aplica a gravidade
-            coyoteCounter -= Time.deltaTime; // Define a tolerância do coyote time
+            // Só mude para animação de pulo se ele realmente estiver se movendo verticalmente de forma expressiva (evita micro-quedas)
+            if (verticalVelocity > 0.1f || verticalVelocity < -2.5f)
+            {
+                animPlayer.currentState = Player_AnimatorController.AnimState.Jump;
+            }
 
-            if (isSideFlipping) //Caso ele esteja realizando o side flip, aplica a força de recuo
+            verticalVelocity -= gravity * Time.deltaTime; // Aplica a gravidade
+            coyoteCounter -= Time.deltaTime;
+
+            if (isSideFlipping)
             {
                 currentVelocity = Vector3.MoveTowards(currentVelocity, sideFlipDirection * (sideFlipBackwardForce * 0.5f), Time.deltaTime * 2f);
             }
         }
 
-        // Apenas  a execução do Pulo
+        // Execução do Pulo
         if (Input.GetButtonDown("Jump") && coyoteCounter > 0f)
         {
             if (derrapando)
             {
                 isSideFlipping = true;
                 derrapando = false;
-
                 sideFlipDirection = -transform.forward;
-
                 verticalVelocity = sideFlipJumpForce;
                 currentVelocity = sideFlipDirection * sideFlipBackwardForce;
-
                 transform.rotation = Quaternion.LookRotation(sideFlipDirection);
             }
             else
@@ -192,7 +195,7 @@ public class Movement : MonoBehaviour
                 verticalVelocity = jumpForce;
             }
 
-            coyoteCounter = 0f; // Zera para evitar múltiplos pulos no ar dentro da mesma janela
+            coyoteCounter = 0f;
         }
     }
     #endregion
