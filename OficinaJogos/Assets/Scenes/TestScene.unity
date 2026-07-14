@@ -401,8 +401,8 @@ Transform:
   m_GameObject: {fileID: 339325172}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.85744, y: 0, z: 10.70135}
-  m_LocalScale: {x: 2.8562, y: 2.8562, z: 2.8562}
+  m_LocalPosition: {x: -31.0835, y: 0, z: 21.3117}
+  m_LocalScale: {x: 7.598482, y: 2.8562, z: 11.911972}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1615,6 +1615,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0472a3700d933cd4e93cf0dc191172fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player_AnimatorController
+  tanoChao: 0
   currentState: 0
 --- !u!95 &2017926576
 Animator:
@@ -1836,8 +1837,8 @@ MonoBehaviour:
     Wrap: 1
     Recentering:
       Enabled: 1
-      Wait: 1
-      Time: 2
+      Wait: 4
+      Time: 5
     Restrictions: 0
   VerticalAxis:
     Value: 17.5
@@ -1846,8 +1847,8 @@ MonoBehaviour:
     Wrap: 0
     Recentering:
       Enabled: 1
-      Wait: 1
-      Time: 2
+      Wait: 4
+      Time: 5
     Restrictions: 0
   RadialAxis:
     Value: 1
