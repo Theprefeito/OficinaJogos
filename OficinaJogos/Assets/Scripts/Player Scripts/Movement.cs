@@ -61,10 +61,9 @@ public class Movement : MonoBehaviour
         Jump();
 
 
-    if(controller.isGrounded == false)
-    {
-        animPlayer.currentState = Player_AnimatorController.AnimState.Jump;
-    }
+   
+        
+    
         Vector3 finalMotion = currentVelocity + Vector3.up * verticalVelocity;
         controller.Move(finalMotion * Time.deltaTime);
     }
@@ -143,7 +142,7 @@ public class Movement : MonoBehaviour
         {
             animPlayer.currentState = Player_AnimatorController.AnimState.Run;
         }
-        else
+        else if(controller.isGrounded)
         {
             animPlayer.currentState = Player_AnimatorController.AnimState.Idle;
         }
@@ -163,15 +162,13 @@ public class Movement : MonoBehaviour
         }
         else //Caso o evento anterior não aconteça
         {
+            animPlayer.currentState = Player_AnimatorController.AnimState.Jump;
             verticalVelocity -= gravity * Time.deltaTime; // Aplica a gravidade
             coyoteCounter -= Time.deltaTime; // Define a tolerância do coyote time
 
             if (isSideFlipping) //Caso ele esteja realizando o side flip, aplica a força de recuo
             {
-                currentVelocity = Vector3.MoveTowards(
-                    currentVelocity,
-                    sideFlipDirection * (sideFlipBackwardForce * 0.5f),
-                    Time.deltaTime * 2f);
+                currentVelocity = Vector3.MoveTowards(currentVelocity, sideFlipDirection * (sideFlipBackwardForce * 0.5f), Time.deltaTime * 2f);
             }
         }
 

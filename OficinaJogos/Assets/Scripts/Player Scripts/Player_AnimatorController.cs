@@ -71,8 +71,8 @@ public class Player_AnimatorController : MonoBehaviour
      private void OnJump()
     {
         
-        animator.SetBool("IsJump", true); 
-
+        animator.SetBool("IsJump", true);
+        animator.SetBool("IsRun", false);
     }
 
 
