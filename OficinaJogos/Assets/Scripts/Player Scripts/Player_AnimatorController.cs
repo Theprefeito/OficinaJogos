@@ -7,7 +7,6 @@ public class Player_AnimatorController : MonoBehaviour
     {
         Idle,
         Run,
-        Jump
     }
 
     public AnimState currentState;
@@ -27,8 +26,8 @@ public class Player_AnimatorController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-        {
-              if(currentState == AnimState.Idle)
+    {
+        if(currentState == AnimState.Idle)
         {
             OnIdle();
         }
@@ -36,11 +35,6 @@ public class Player_AnimatorController : MonoBehaviour
         {
             OnRun();
         }
-        else if(currentState == AnimState.Jump)
-        {
-            OnJump();
-        }
-
     }
 
     public void SetRunAnimationSpeed(float currentSpeed, float maxSpeed)
@@ -51,20 +45,15 @@ public class Player_AnimatorController : MonoBehaviour
 
     private void OnIdle()
     {
+        
         animator.SetBool("IsRun", false);
-        animator.SetBool("IsJump", false);
     }
 
     private void OnRun()
     {
-        animator.SetBool("IsRun", true);
-        animator.SetBool("IsJump", false);
+        
+        animator.SetBool("IsRun", true);        
     }
 
-    private void OnJump()
-    {
-        animator.SetBool("IsRun", false);
-        animator.SetBool("IsJump", true);
-    }
     
 }
