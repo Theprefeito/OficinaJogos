@@ -1581,7 +1581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5ffc3a4b90d854a4fac8b9b66bfe9f3c, type: 3}
       propertyPath: m_Name
-      value: PlayerModel3D
+      value: PolumModel3D
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 5ffc3a4b90d854a4fac8b9b66bfe9f3c, type: 3}
       propertyPath: m_Controller
@@ -1594,6 +1594,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5ffc3a4b90d854a4fac8b9b66bfe9f3c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2017926575}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5ffc3a4b90d854a4fac8b9b66bfe9f3c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2017926576}
   m_SourcePrefab: {fileID: 100100000, guid: 5ffc3a4b90d854a4fac8b9b66bfe9f3c, type: 3}
 --- !u!4 &2017926573 stripped
 Transform:
@@ -1613,6 +1616,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player_AnimatorController
   currentState: 0
+--- !u!95 &2017926576
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 214149219}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 71e48fd6c5f678e4aad7fbfec10e18e7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2104279068
 GameObject:
   m_ObjectHideFlags: 0

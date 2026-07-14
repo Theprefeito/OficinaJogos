@@ -3,12 +3,7 @@ guid: 5ffc3a4b90d854a4fac8b9b66bfe9f3c
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 56a4494ff0b5be14cb9d6cb13f0601c3, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -27,101 +22,14 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Armature|Action
-      takeName: Armature|Action
-      internalID: 885944232402757753
-      firstFrame: 0
-      lastFrame: 10
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Armature|Action.001
-      takeName: Armature|Action.001
-      internalID: -9125523489441110064
-      firstFrame: 0
-      lastFrame: 15
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Armature|EmptyAction
-      takeName: Armature|EmptyAction
-      internalID: -751813995980742648
-      firstFrame: 0
-      lastFrame: 0
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -175,122 +83,7 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton:
-    - name: JhonKarmho(Clone)
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Armature
-      parentName: JhonKarmho(Clone)
-      position: {x: -0, y: 0.5358363, z: 0}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 100, y: 100, z: 100}
-    - name: Cintura
-      parentName: Armature
-      position: {x: 0.0005815359, y: -0.0015983584, z: -0.0009782576}
-      rotation: {x: 0.5541939, y: 0.08186323, z: 0.12505132, w: 0.8188588}
-      scale: {x: 1, y: 1, z: 0.9999999}
-    - name: Torso
-      parentName: Cintura
-      position: {x: 2.9103829e-12, y: 0.0031452572, z: -3.6692426e-13}
-      rotation: {x: -0.004921913, y: -0.70705813, z: -0.0064660013, w: 0.70710886}
-      scale: {x: 1.0000001, y: 0.99999994, z: 1.0000002}
-    - name: cabeca
-      parentName: Torso
-      position: {x: 1.841002e-10, y: 0.004832352, z: 0}
-      rotation: {x: 0.006718645, y: -0.00018060206, z: -0.0033281732, w: 0.99997187}
-      scale: {x: 0.9999999, y: 0.99999994, z: 1}
-    - name: Orelha.R
-      parentName: cabeca
-      position: {x: 0.002201797, y: 0.0079414835, z: -0.0033981418}
-      rotation: {x: -0.20815216, y: 0.025923474, z: 0.15902753, w: 0.9647336}
-      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000001}
-    - name: Orelha.L
-      parentName: cabeca
-      position: {x: 0.002179186, y: 0.008027785, z: 0.0035925906}
-      rotation: {x: -0.1427616, y: 0.9609451, z: 0.2364829, w: 0.016720235}
-      scale: {x: 0.99999976, y: 1.0000001, z: 1.0000001}
-    - name: Ombro.R
-      parentName: Torso
-      position: {x: -0.00040847954, y: 0.0032739444, z: -0.0033713912}
-      rotation: {x: 0.8362414, y: 0.08096925, z: 0.039848514, w: -0.540885}
-      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000001}
-    - name: Antebraco.R
-      parentName: Ombro.R
-      position: {x: 2.9802322e-10, y: 0.0029520292, z: 5.5879353e-11}
-      rotation: {x: 0.12483485, y: 0.0075800577, z: -0.041744046, w: 0.99127}
-      scale: {x: 1.0000001, y: 0.9999998, z: 1.0000001}
-    - name: Mao.R
-      parentName: Antebraco.R
-      position: {x: -4.4703483e-10, y: 0.0018148152, z: 0}
-      rotation: {x: -0.113606125, y: -0.006573156, z: 0.040487528, w: 0.9926788}
-      scale: {x: 1.0000004, y: 1.0000005, z: 0.99999994}
-    - name: Ombro.L
-      parentName: Torso
-      position: {x: -0.00022316528, y: 0.0033069202, z: 0.0035898872}
-      rotation: {x: -0.040518638, y: 0.64413464, z: 0.7625861, w: 0.043718476}
-      scale: {x: 0.9999998, y: 0.9999998, z: 0.99999994}
-    - name: Antebraco.L
-      parentName: Ombro.L
-      position: {x: 7.4505804e-11, y: 0.0029651932, z: 0}
-      rotation: {x: -0.09719828, y: 0.018088792, z: 0.08893574, w: -0.99111843}
-      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000004}
-    - name: Mao.L
-      parentName: Antebraco.L
-      position: {x: -7.4505804e-11, y: 0.0018044118, z: 1.4901161e-10}
-      rotation: {x: -0.13801098, y: -0.005792154, z: -0.0018115307, w: 0.9904121}
-      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000004}
-    - name: Perna.R
-      parentName: Cintura
-      position: {x: 0.0026182558, y: 0.0019748711, z: 0.0010721487}
-      rotation: {x: 0.7682726, y: 0.01139011, z: 0.631288, w: -0.105371006}
-      scale: {x: 0.99999744, y: 0.99999917, z: 1.0000004}
-    - name: Joelho.R
-      parentName: Perna.R
-      position: {x: 1.3475074e-10, y: 0.0017098748, z: 2.7939676e-10}
-      rotation: {x: -0.03197601, y: 0.009421882, z: 0.035758253, w: 0.9988044}
-      scale: {x: 1.0000013, y: 0.99999887, z: 1.0000004}
-    - name: Pe.R
-      parentName: Joelho.R
-      position: {x: 1.4901161e-10, y: 0.0034566377, z: -2.933666e-10}
-      rotation: {x: 0.04064559, y: 0.046792146, z: 0.5589707, w: 0.8268677}
-      scale: {x: 0.9999995, y: 1.0000002, z: 1.0000001}
-    - name: Perna.L
-      parentName: Cintura
-      position: {x: -0.0027725133, y: 0.0017679714, z: -0.0032314598}
-      rotation: {x: 0.76847625, y: -0.003916621, z: -0.62913454, w: -0.11669954}
-      scale: {x: 0.99999577, y: 0.99999976, z: 1.0000002}
-    - name: Joelho.L
-      parentName: Perna.L
-      position: {x: -2.2351741e-10, y: 0.0017098745, z: 3.352761e-10}
-      rotation: {x: -0.06090314, y: -0.018695075, z: -0.042603146, w: 0.99705887}
-      scale: {x: 0.9999989, y: 1.0000005, z: 0.99999994}
-    - name: Pe.L
-      parentName: Joelho.L
-      position: {x: 2.4214386e-10, y: 0.0034566387, z: -1.8626451e-11}
-      rotation: {x: 0.060850017, y: -0.022627423, z: -0.543189, w: 0.83709687}
-      scale: {x: 0.9999997, y: 1.0000015, z: 1.0000006}
-    - name: Rabo1
-      parentName: Cintura
-      position: {x: -0.00008771183, y: 0.0016315654, z: 0.0032825598}
-      rotation: {x: -0.012781563, y: 0.18532051, z: 0.9825122, w: -0.012761025}
-      scale: {x: 1.0000005, y: 1.0000001, z: 0.99999934}
-    - name: Rabo2
-      parentName: Rabo1
-      position: {x: -4.6566128e-12, y: 0.003281415, z: -4.0163284e-10}
-      rotation: {x: 0.4052875, y: -0.005382046, z: -0.0026739694, w: 0.9141696}
-      scale: {x: 1.0000005, y: 0.9999998, z: 1.0000001}
-    - name: Rabo3
-      parentName: Rabo2
-      position: {x: 1.2805685e-11, y: 0.004187401, z: -3.583409e-11}
-      rotation: {x: 0.3371056, y: -0.008467133, z: 0.016341707, w: 0.9412869}
-      scale: {x: 0.9999995, y: 1.0000004, z: 0.99999875}
-    - name: Cube
-      parentName: JhonKarmho(Clone)
-      position: {x: 0.0010929704, y: 1.4632691, z: 0.05088657}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 100, y: 100, z: 100}
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -301,13 +94,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

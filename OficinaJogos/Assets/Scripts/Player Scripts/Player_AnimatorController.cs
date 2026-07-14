@@ -3,10 +3,12 @@ using UnityEngine;
 public class Player_AnimatorController : MonoBehaviour
 {
     private Animator animator;
+    public bool tanoChao;
     public enum AnimState
     {
         Idle,
         Run,
+        Jump,
     }
 
     public AnimState currentState;
@@ -20,6 +22,8 @@ public class Player_AnimatorController : MonoBehaviour
                 break;
             case AnimState.Run:
                 break;
+            case AnimState.Jump:
+                break;
         }
         animator = GetComponent<Animator>();
     }
@@ -31,10 +35,18 @@ public class Player_AnimatorController : MonoBehaviour
         {
             OnIdle();
         }
-        else if(currentState == AnimState.Run)
+        
+        if(currentState == AnimState.Run)
         {
             OnRun();
         }
+       
+        if(currentState == AnimState.Jump)
+        {
+            OnJump();
+        }
+        
+        
     }
 
     public void SetRunAnimationSpeed(float currentSpeed, float maxSpeed)
@@ -45,15 +57,24 @@ public class Player_AnimatorController : MonoBehaviour
 
     private void OnIdle()
     {
-        
         animator.SetBool("IsRun", false);
+        animator.SetBool("IsJump", false);
     }
 
     private void OnRun()
     {
         
-        animator.SetBool("IsRun", true);        
+        animator.SetBool("IsRun", true);
+        animator.SetBool("IsJump", false);        
     }
 
-    
+     private void OnJump()
+    {
+        
+        animator.SetBool("IsJump", true); 
+
+    }
+
+
+
 }

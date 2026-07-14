@@ -60,6 +60,11 @@ public class Movement : MonoBehaviour
         BasicMovement();
         Jump();
 
+
+    if(controller.isGrounded == false)
+    {
+        animPlayer.currentState = Player_AnimatorController.AnimState.Jump;
+    }
         Vector3 finalMotion = currentVelocity + Vector3.up * verticalVelocity;
         controller.Move(finalMotion * Time.deltaTime);
     }
