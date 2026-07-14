@@ -134,7 +134,11 @@ public class Movement : MonoBehaviour
             animPlayer.SetRunAnimationSpeed(currentVelocity.magnitude, maxSpeed);
         }
 
-        if(controller.isGrounded && currentVelocity.magnitude > 0.1f)
+        if (!controller.isGrounded)
+        {
+            animPlayer.currentState = Player_AnimatorController.AnimState.Jump; //Mudei essa linha so pra testar o pulo dentro do jogo
+        }
+        else if (currentVelocity.magnitude > 0.1f)
         {
             animPlayer.currentState = Player_AnimatorController.AnimState.Run;
         }
