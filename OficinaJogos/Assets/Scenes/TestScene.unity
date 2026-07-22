@@ -313,8 +313,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16018228, y: -0.00000004283644, z: 0.000000006951399, w: 0.9870875}
-  m_LocalPosition: {x: -26.85745, y: 2.651, z: 6.20135}
+  m_LocalRotation: {x: 0.18243729, y: 0.000000002445308, z: -4.5373e-10, w: 0.98321754}
+  m_LocalPosition: {x: -26.85745, y: 2.8981228, z: 6.155516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1917,7 +1917,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
-        Gain: 1
+        Gain: 0.35
         LegacyInput: 
         LegacyGain: 1
         CancelDeltaTime: 0
@@ -1930,7 +1930,7 @@ MonoBehaviour:
       Enabled: 1
       Input:
         InputAction: {fileID: -5630151704836100654, guid: 1d6e640e716dc4ff6989b73d02023f2b, type: 3}
-        Gain: -1
+        Gain: -0.35
         LegacyInput: 
         LegacyGain: 1
         CancelDeltaTime: 0
@@ -1993,7 +1993,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
-  Damping: {x: 0.5, y: 0.5}
+  Damping: {x: 0.4, y: 0.4}
   Lookahead:
     Enabled: 0
     Time: 0.15
@@ -2014,7 +2014,7 @@ MonoBehaviour:
   TargetOffset: {x: 0, y: 0, z: 0}
   TrackerSettings:
     BindingMode: 4
-    PositionDamping: {x: 1, y: 1, z: 1}
+    PositionDamping: {x: 0.4, y: 0.4, z: 0.4}
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
@@ -2045,7 +2045,7 @@ MonoBehaviour:
   VerticalAxis:
     Value: 17.5
     Center: 17.5
-    Range: {x: -10, y: 45}
+    Range: {x: -15, y: 45}
     Wrap: 0
     Recentering:
       Enabled: 1
@@ -2113,8 +2113,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2120787457}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16018225, y: -0.000000042579668, z: 0.000000005369116, w: 0.9870875}
-  m_LocalPosition: {x: -26.85745, y: 2.651, z: 6.20135}
+  m_LocalRotation: {x: 0.18243726, y: 0.0000000024453073, z: -4.5372964e-10, w: 0.98321754}
+  m_LocalPosition: {x: -26.85745, y: 2.8981228, z: 6.155516}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2147,7 +2147,7 @@ MonoBehaviour:
     Enabled: 0
     TerrainLayers:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 8
     MaximumRaycast: 10
     Damping: 0.5
 --- !u!114 &2120787465
@@ -2169,7 +2169,7 @@ MonoBehaviour:
   TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
-  MinimumDistanceFromTarget: 0.15
+  MinimumDistanceFromTarget: 0.35
   AvoidObstacles:
     Enabled: 1
     DistanceLimit: 0
@@ -2184,7 +2184,7 @@ MonoBehaviour:
     Damping: 0.4
     DampingWhenOccluded: 0.2
   ShotQualityEvaluation:
-    Enabled: 0
+    Enabled: 1
     OptimalDistance: 10
     NearLimit: 5
     FarLimit: 30
@@ -2203,7 +2203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBasicMultiChannelPerlin
   NoiseProfile: {fileID: 11400000, guid: 20a705aea2d80e0478fb89b6f43d8530, type: 2}
   PivotOffset: {x: 0, y: 0, z: 0}
-  AmplitudeGain: 0.7
+  AmplitudeGain: 0.6
   FrequencyGain: 0.2
   m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
