@@ -16,7 +16,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Interact",
+                    "name": "Recenter",
                     "type": "Button",
                     "id": "fec2bf8e-3a97-41de-b57b-39e862ef1649",
                     "expectedControlType": "",
@@ -106,7 +106,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Interact",
+                    "action": "Recenter",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

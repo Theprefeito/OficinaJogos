@@ -2168,9 +2168,9 @@ MonoBehaviour:
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Player_Interactor, Assembly-CSharp
-        m_MethodName: InputInteract
+      - m_Target: {fileID: 2120787467}
+        m_TargetAssemblyTypeName: Recenter, Assembly-CSharp
+        m_MethodName: RecenterCamera
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2185,9 +2185,9 @@ MonoBehaviour:
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Player_Interactor, Assembly-CSharp
-        m_MethodName: InputDrop
-        m_Mode: 0
+        m_TargetAssemblyTypeName: Recenter, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2636,6 +2636,7 @@ GameObject:
   - component: {fileID: 2120787464}
   - component: {fileID: 2120787465}
   - component: {fileID: 2120787466}
+  - component: {fileID: 2120787467}
   m_Layer: 0
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -2782,13 +2783,13 @@ MonoBehaviour:
   RecenteringTarget: 2
   HorizontalAxis:
     Value: 0
-    Center: 0
+    Center: -68.7757
     Range: {x: -180, y: 180}
     Wrap: 1
     Recentering:
       Enabled: 0
-      Wait: 4
-      Time: 5
+      Wait: 0
+      Time: 0.25
     Restrictions: 0
   VerticalAxis:
     Value: 17.5
@@ -2954,6 +2955,18 @@ MonoBehaviour:
   AmplitudeGain: 0.6
   FrequencyGain: 0.2
   m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &2120787467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120787457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6667229e71c6ff14bbf0ed601892c85e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Recenter
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
