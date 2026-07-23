@@ -25,6 +25,10 @@ public class Movement : MonoBehaviour
     public float sideFlipJumpForce = 11f;
     public float sideFlipBackwardForce = 5f;
     public float gravity = 20f;
+  
+    [Header("JumpBuffer")]
+    public float bufferDistance;
+    private float bufferCounter;
 
     [Header("Coyote Time")]
     [Tooltip("Tempo em segundos que o jogador ainda pode pular após sair do chão.")]
@@ -151,9 +155,23 @@ public class Movement : MonoBehaviour
 
     #region Jumping
 
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            bufferCounter = bufferDistance;  //Dispara assim que aperta a tecla
+        }
+    }
 
     void Jump()
     {
+
+        if (bufferCounter > 0)
+        {
+            bufferCounter -= Time.deltaTime;  //Começa a diminuir o valor assim que é disparado em "OnJump", para não pular infinitamente ou sempre antes do chão
+        }
+        
+        
         // Se o personagem estiver no chão
         if (controller.isGrounded)
         {
@@ -179,7 +197,7 @@ public class Movement : MonoBehaviour
         }
 
         // Execução do Pulo
-        if (Input.GetButtonDown("Jump") && coyoteCounter > 0f)
+        if (bufferCounter > 0f && coyoteCounter > 0f) //Adicionado o jumpBuffer para só pular quando for maior que zero e o disparo ocorrer
         {
             if (derrapando)
             {
@@ -196,6 +214,7 @@ public class Movement : MonoBehaviour
             }
 
             coyoteCounter = 0f;
+           
         }
     }
     #endregion
