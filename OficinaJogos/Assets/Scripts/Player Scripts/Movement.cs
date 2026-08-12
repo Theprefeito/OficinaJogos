@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
+
 public class Movement : MonoBehaviour
 {
     [Header("Referências")]
@@ -25,6 +25,9 @@ public class Movement : MonoBehaviour
     public float sideFlipJumpForce = 11f;
     public float sideFlipBackwardForce = 5f;
     public float gravity = 20f;
+    public bool TaNoGrounded;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
   
     [Header("JumpBuffer")]
     public float bufferDistance;
@@ -36,7 +39,8 @@ public class Movement : MonoBehaviour
     private float coyoteCounter;
 
     //Componentes
-    private CharacterController controller;
+    //private CharacterController controller;
+    private Rigidbody rigPlayer;
     private Vector3 currentVelocity;
     private float verticalVelocity;
     private Player_AnimatorController animPlayer;
@@ -48,7 +52,7 @@ public class Movement : MonoBehaviour
 
     void Start()
     {
-        controller = GetComponent<CharacterController>();
+        rigPlayer = GetComponent<Rigidbody>();
         if (cameraTransform == null)
         {
             cameraTransform = Camera.main.transform;
@@ -63,15 +67,31 @@ public class Movement : MonoBehaviour
     {
         BasicMovement();
         Jump();
-
-
-   
+        TesteDeChao();
         
-    
         Vector3 finalMotion = currentVelocity + Vector3.up * verticalVelocity;
-        controller.Move(finalMotion * Time.deltaTime);
     }
 
+
+    public bool IsGrounded()
+    {
+        return Physics.OverlapSphere(groundCheck.position, 0.2f, groundLayer).Length > 0;
+        
+    }
+
+   public void TesteDeChao()
+    {
+        if (IsGrounded() == true)
+        {
+            TaNoGrounded = true;
+        }
+        else 
+        {
+            TaNoGrounded = false;
+        }
+    }
+        
+    
     #region Basic Movement
     public void analogicMove(InputAction.CallbackContext context) //Serve pro novo Input System
     {
@@ -79,16 +99,8 @@ public class Movement : MonoBehaviour
     }
 
     void BasicMovement()
-    {
-        if (isSideFlipping)
-        {
-            if (controller.isGrounded) //Define se quando o jogador estiver no chão, ele não estará mais realizando o side flip
-            {
-                isSideFlipping = false;
-            }
-
-            return;
-        }
+    { 
+       
 
         Vector3 direction = new Vector3(directionInput.x, 0f, directionInput.y).normalized; //Pega o input e transforma em movimento 3D
         Vector3 cameraForward = cameraTransform.forward; //Define o movimento Z da camera
@@ -100,53 +112,12 @@ public class Movement : MonoBehaviour
 
         cameraForward.Normalize(); //Impede bug da verticalidade da camera, normalizando o vetor
         cameraRight.Normalize(); //Impede bug da verticalidade da camera, normalizando o vetor
-
-        Vector3 targetDir = (cameraForward * direction.z + cameraRight * direction.x).normalized;
-
-        if (targetDir.magnitude > 0.1f && controller.isGrounded)
-        {
-            float dotProduct = Vector3.Dot(currentVelocity.normalized, targetDir);
-
-            if (dotProduct < -0.5f && currentVelocity.magnitude > (maxSpeed * 0.6f))
-            {
-                derrapando = true;
-            }
-        }
-
-        if (derrapando) //Faz o derrapamento do personagem
-        {
-            currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, derrapadaDeceleration * Time.deltaTime); // Faz a desaceleração do personagem enquanto ele está derrapando
-
-            if (currentVelocity.magnitude < 0.5f) //Quando a velocidade do personagem for menor que 0.5, ele não estará mais derrapando
-            {
-                derrapando = false;
-            }
-        }
-        else if (targetDir.magnitude > 0.1f)
-        {
-            Vector3 targetVelocity = targetDir * maxSpeed;
-
-            currentVelocity = Vector3.MoveTowards(currentVelocity, targetVelocity, acceleration * Time.deltaTime);
-            animPlayer.SetRunAnimationSpeed(currentVelocity.magnitude, maxSpeed);
-
-            float speedPercent = currentVelocity.magnitude / maxSpeed;
-            float currentTurnSpeed = Mathf.Lerp(baseTurnSpeed, minTurnSpeed, speedPercent);
-
-            Quaternion targetRotation = Quaternion.LookRotation(targetDir);
-
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, currentTurnSpeed * Time.deltaTime);
-        }
-        else
-        {
-            currentVelocity = Vector3.MoveTowards(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
-            animPlayer.SetRunAnimationSpeed(currentVelocity.magnitude, maxSpeed);
-        }
-
-        if(controller.isGrounded && currentVelocity.magnitude > 0.1f)
+        
+        if(IsGrounded() && currentVelocity.magnitude > 0.1f)
         {
             animPlayer.currentState = Player_AnimatorController.AnimState.Run;
         }
-        else if(controller.isGrounded)
+        else if(IsGrounded())
         {
             animPlayer.currentState = Player_AnimatorController.AnimState.Idle;
         }
@@ -165,7 +136,6 @@ public class Movement : MonoBehaviour
 
     void Jump()
     {
-
         if (bufferCounter > 0)
         {
             bufferCounter -= Time.deltaTime;  //Começa a diminuir o valor assim que é disparado em "OnJump", para não pular infinitamente ou sempre antes do chão
@@ -173,10 +143,9 @@ public class Movement : MonoBehaviour
         
         
         // Se o personagem estiver no chão
-        if (controller.isGrounded)
+        if (IsGrounded())
         {
-            // IMPORTANTE: Uma força gravitacional constante menor para garantir que ele permaneça colado ao chão
-            verticalVelocity = -2f;
+            
             coyoteCounter = coyoteDuration;
         }
         else
@@ -187,7 +156,7 @@ public class Movement : MonoBehaviour
                 animPlayer.currentState = Player_AnimatorController.AnimState.Jump;
             }
 
-            verticalVelocity -= gravity * Time.deltaTime; // Aplica a gravidade
+           
             coyoteCounter -= Time.deltaTime;
 
             if (isSideFlipping)
