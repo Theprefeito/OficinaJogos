@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player_Charge : MonoBehaviour
 {
@@ -10,9 +11,12 @@ public class Player_Charge : MonoBehaviour
     [Header("Configurações da Arrancada")]
     public float arrancadaDeceleration = 30f;
 
-    [Header("Debug / Status")]
-    [SerializeField] private float currentChargePercent;
-    [SerializeField] private float currentChargeForce;
+    [Header("Ui")]
+    public Slider chargeSlider;
+    public Image sliderFillImage;
+
+    private float currentChargePercent;
+    private float currentChargeForce;
 
     // Referências do GameObject
     private Movement movement;
@@ -38,10 +42,20 @@ public class Player_Charge : MonoBehaviour
     void Update()
     {
         HandleChargeInput(); //Botões do charge
+        FillChangeColor(); //Atualiza a cor do slider
 
         if (isCharging)
         {
             UpdateArrancadaMovement();
+        }
+
+        if (isHoldingCharge)
+        {
+            chargeSlider.value = currentChargeForce;           
+        }
+        else
+        {
+            chargeSlider.value = 0f;
         }
     }
 
@@ -179,6 +193,14 @@ public class Player_Charge : MonoBehaviour
         if (movement != null)
         {
             movement.enabled = true;
+        }
+    }
+
+    private void FillChangeColor()
+    {
+        if (sliderFillImage != null)
+        {
+            sliderFillImage.color = Color.Lerp(Color.green, Color.red, currentChargePercent);
         }
     }
 
