@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(CharacterController))]
+
 public class Movement : MonoBehaviour
 {
     [Header("Referências")]
     [SerializeField] private Transform cameraTransform;
+    public bool isCharging = false;
 
     [Header("Configurações de Movimento")]
     public float maxSpeed = 8f;
@@ -80,6 +81,17 @@ public class Movement : MonoBehaviour
 
     void BasicMovement()
     {
+        if (isCharging)
+        {
+            // Zera a velocidade horizontal para travar o jogador no lugar
+            currentVelocity = Vector3.zero;
+            if (controller.isGrounded)
+            {
+                animPlayer.currentState = Player_AnimatorController.AnimState.Idle;
+            }
+            return; // Interrompe a leitura de inputs de movimento
+        }
+
         if (isSideFlipping)
         {
             if (controller.isGrounded) //Define se quando o jogador estiver no chão, ele não estará mais realizando o side flip
@@ -165,6 +177,7 @@ public class Movement : MonoBehaviour
 
     void Jump()
     {
+        if (isCharging) return;
 
         if (bufferCounter > 0)
         {

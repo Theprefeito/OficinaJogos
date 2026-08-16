@@ -1995,6 +1995,7 @@ GameObject:
   - component: {fileID: 1905328965}
   - component: {fileID: 1905328966}
   - component: {fileID: 1905328968}
+  - component: {fileID: 1905328969}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2089,6 +2090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
   cameraTransform: {fileID: 330585546}
+  isCharging: 0
   maxSpeed: 8
   acceleration: 12
   deceleration: 13
@@ -2220,6 +2222,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.03, z: -0.1}
+--- !u!114 &1905328969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905328959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05258add7a4d82d4fa1f1d79eee9e750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player_Charge
+  maxPullDistance: 300
+  maxChargeForce: 50
+  currentChargePercent: 0
+  currentChargeForce: 0
 --- !u!1 &1946691438
 GameObject:
   m_ObjectHideFlags: 0
