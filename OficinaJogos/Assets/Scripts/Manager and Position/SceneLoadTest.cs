@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoadTest : MonoBehaviour
 {
   
-    public string sceneName;
+    public int sceneName;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,19 +17,15 @@ public class SceneLoadTest : MonoBehaviour
     {
         
     }
+    
 
-    private void LoadScene()
+
+    private void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene(sceneName);
-    }
-
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.gameObject.CompareTag("Door"))
+        if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("bateu"); 
-            LoadScene();
+            PositionManager.Instance.LoadScene(sceneName);
         }
     }
 }

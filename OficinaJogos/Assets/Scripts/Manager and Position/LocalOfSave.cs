@@ -33,6 +33,8 @@ public class LocalOfSave : MonoBehaviour
             PositionManager.Instance.rotation = collision.transform.rotation;
         
             PositionManager.Instance.SavedPosition = true;
+            
+            PositionManager.Instance.LoadScene(1);
         }
     }
     

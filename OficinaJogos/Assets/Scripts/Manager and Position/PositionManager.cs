@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PositionManager : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class PositionManager : MonoBehaviour
 
     [Header("Scene")]
     
-    [SerializeField] public int scene;
     
     public bool SavedPosition;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,7 +24,13 @@ public class PositionManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-            return;
+            // return;
         }
     }
+
+    public void LoadScene(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
+    
 }
