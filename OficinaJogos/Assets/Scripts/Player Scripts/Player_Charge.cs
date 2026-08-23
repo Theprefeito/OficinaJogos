@@ -65,7 +65,7 @@ public class Player_Charge : MonoBehaviour
         if (mouse == null || isCharging) return;
 
         // Quando o botão esquerdo do mouse é pressionado, inicia o Charge
-        if (mouse.leftButton.wasPressedThisFrame)
+        if (mouse.leftButton.wasPressedThisFrame && animPlayer.currentState != Player_AnimatorController.AnimState.Jump)
         {
             StartCharge(mouse.position.ReadValue());
         }
