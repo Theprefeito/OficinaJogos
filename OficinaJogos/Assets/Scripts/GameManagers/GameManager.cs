@@ -1,19 +1,21 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
-public class PositionManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    [Header("Position")]
-    public static PositionManager Instance;
-
-    public Vector3 position;
-    public Quaternion rotation;
-
-    [Header("Scene")]
+    public static GameManager Instance;
     
-    
-    public bool SavedPosition;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    
     void Awake()
     {
         if (Instance == null)
@@ -27,10 +29,9 @@ public class PositionManager : MonoBehaviour
             // return;
         }
     }
-
-    public void LoadScene(int sceneIndex)
+    
+    public void CarregarCenar(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
     }
-    
 }

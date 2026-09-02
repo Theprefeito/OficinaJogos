@@ -25,7 +25,7 @@ public class SceneLoadTest : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("bateu"); 
-            PositionManager.Instance.LoadScene(sceneName);
+            GameManager.Instance.CarregarCenar(sceneName);
         }
     }
 }
