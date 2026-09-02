@@ -34,7 +34,7 @@ public class LocalOfSave : MonoBehaviour
         
             PositionManager.Instance.SavedPosition = true;
             
-            PositionManager.Instance.LoadScene(1);
+            
         }
     }
     

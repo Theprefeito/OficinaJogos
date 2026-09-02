@@ -14,9 +14,9 @@ public class PlayerSaveSpawn : MonoBehaviour
     {
         movement = GetComponent<Movement>();
         charge = GetComponent<Player_Charge>();
-        
-        
-        SpawnPlayer(); // Usar a coroutine é uma boa ideia para desbugar 
+
+
+        StartCoroutine(EsperarACena()); 
         
     }
 
