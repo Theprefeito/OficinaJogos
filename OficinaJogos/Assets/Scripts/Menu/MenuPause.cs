@@ -36,7 +36,7 @@ public class MenuPause : MonoBehaviour
     {
         if (context.performed)
         {
-            Debug.Log("Pause chamado");
+            Debug.Log("o player pausou o jogo");
             pauseMenu.SetActive(true);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;

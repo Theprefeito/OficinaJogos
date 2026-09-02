@@ -2957,6 +2957,7 @@ GameObject:
   - component: {fileID: 1905328969}
   - component: {fileID: 1905328970}
   - component: {fileID: 1905328971}
+  - component: {fileID: 1905328972}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3169,6 +3170,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: b8f1e3db-7a97-4856-b627-9edf37a8b9e7
     m_ActionName: 'UI/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1905328972}
+        m_TargetAssemblyTypeName: PlayerDash, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5103bc33-e93c-4814-ab06-ef846a859402
+    m_ActionName: 'Player/Dash[/Keyboard/q]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -3251,6 +3268,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0.0958662, y: 0, z: 0}
+--- !u!114 &1905328972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905328959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b610cf1a0303da54f9591ff2aaa2ed21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
+  dashForce: 15
+  dashDuration: 0.2
+  dashCooldown: 1
 --- !u!1 &1946691438
 GameObject:
   m_ObjectHideFlags: 0
