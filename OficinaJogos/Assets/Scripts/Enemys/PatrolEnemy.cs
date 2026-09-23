@@ -20,12 +20,18 @@ public class PatrolEnemy : MonoBehaviour
        
         if (transform.position == waypoints[wayIndex].position)
         {
-            wayIndex++;
+            wayIndex += 1;
+
+            if (wayIndex >= waypoints.Length)
+            {
+                wayIndex = 0;
+            }
         }
 
-        if (wayIndex >= waypoints.Length)
-        {
-            wayIndex = 0;
-        }
+    
     }
+
+    
+    
+    
 }
