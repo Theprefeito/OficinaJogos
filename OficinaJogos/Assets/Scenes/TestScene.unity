@@ -1269,7 +1269,7 @@ GameObject:
   - component: {fileID: 440967168}
   - component: {fileID: 440967173}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemyPatrol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1292,6 +1292,7 @@ MonoBehaviour:
   - {fileID: 1104257538}
   - {fileID: 230403670}
   wayIndex: 0
+  distanceToWaypoint: 0.3
   speedEnemy: 4
 --- !u!65 &440967169
 BoxCollider:
