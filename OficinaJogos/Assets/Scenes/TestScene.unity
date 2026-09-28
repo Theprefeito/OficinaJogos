@@ -1289,6 +1289,8 @@ MonoBehaviour:
   wayIndex: 0
   distanceToWaypoint: 0.3
   speedEnemy: 4
+  enemyWaitTime: 5
+  isWaiting: 0
 --- !u!65 &440967169
 BoxCollider:
   m_ObjectHideFlags: 0

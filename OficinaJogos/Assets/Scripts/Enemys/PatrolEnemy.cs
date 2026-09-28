@@ -14,6 +14,8 @@ public class PatrolEnemy : MonoBehaviour
     [Header("Enemy Stats")]
     [SerializeField] public float speedEnemy;
 
+    [SerializeField] public int enemyWaitTime;
+    public bool isWaiting;
   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,14 +26,8 @@ public class PatrolEnemy : MonoBehaviour
 
     void FixedUpdate()
     {
-
-      
-        {
-            EnemyPatrolMovement();
-                    
-            WaypointPatrol();
-        }
         
+        CheckPatrolMovement();
     }
     // Update is called once per frame
     void Update()
@@ -47,15 +43,33 @@ public class PatrolEnemy : MonoBehaviour
 
     private void WaypointPatrol()
     {
-        if (Vector3.Distance(transform.position, waypoints[wayIndex].position) <= distanceToWaypoint)
+        if (Vector3.Distance(transform.position, waypoints[wayIndex].position) <= distanceToWaypoint && !isWaiting)
         {
-            wayIndex += 1;
+            StartCoroutine(WaitTime());
+        }
+    }
 
-            if (wayIndex >= waypoints.Length)
-            {
-                wayIndex = 0;
-            }
-            
+    private IEnumerator WaitTime()
+    {
+        isWaiting = true;
+        yield return new WaitForSeconds(enemyWaitTime);
+        
+        wayIndex += 1;
+
+        if (wayIndex >= waypoints.Length)
+        {
+            wayIndex = 0;
+        }
+       
+        isWaiting = false;
+    }
+    
+    private void CheckPatrolMovement()
+    {
+        if (!isWaiting)
+        {
+            EnemyPatrolMovement();
+            WaypointPatrol();
         }
     }
    
