@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 1757729603884596850}
   - component: {fileID: 5009280380470445523}
   - component: {fileID: 554265966966948447}
-  - component: {fileID: -5726897242016802415}
+  - component: {fileID: -3841531544959301283}
+  - component: {fileID: 8548539165463832268}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -113,7 +114,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-5726897242016802415
+--- !u!114 &-3841531544959301283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,6 +123,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 4810610625987153017}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f3df164b8e678f4aa9901c6f98fd78c, type: 3}
+  m_Script: {fileID: 11500000, guid: 646f378e75262f84cb292e908ba8b9c1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Autodestruicao
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyBullet
+  speed: 20
+  damage: 10
+  lifeTime: 5
+--- !u!54 &8548539165463832268
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4810610625987153017}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
