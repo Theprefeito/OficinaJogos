@@ -7,6 +7,8 @@ TagManager:
   - Interagivel
   - Grabable
   - Door
+  - Destructible
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,6 @@ public class PatrolEnemy : MonoBehaviour
     [Header("Points To Patrol")]
     [SerializeField] private Transform[] waypoints;
 
-   
     public int wayIndex;
     [Header("Values for patrol")]
     [SerializeField] public float distanceToWaypoint;
@@ -16,23 +15,16 @@ public class PatrolEnemy : MonoBehaviour
 
     [SerializeField] public int enemyWaitTime;
     public bool isWaiting;
-  
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
-    {   
-        rbEnemy =  GetComponent<Rigidbody>();
+    {
+        rbEnemy = GetComponent<Rigidbody>();
         wayIndex = 0;
     }
 
     void FixedUpdate()
     {
-        
         CheckPatrolMovement();
-    }
-    // Update is called once per frame
-    void Update()
-    {
-    
     }
 
     private void EnemyPatrolMovement()
@@ -53,17 +45,17 @@ public class PatrolEnemy : MonoBehaviour
     {
         isWaiting = true;
         yield return new WaitForSeconds(enemyWaitTime);
-        
+
         wayIndex += 1;
 
         if (wayIndex >= waypoints.Length)
         {
             wayIndex = 0;
         }
-       
+
         isWaiting = false;
     }
-    
+
     private void CheckPatrolMovement()
     {
         if (!isWaiting)
@@ -72,5 +64,24 @@ public class PatrolEnemy : MonoBehaviour
             WaypointPatrol();
         }
     }
-   
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Player_Charge playerCharge = collision.gameObject.GetComponent<Player_Charge>();
+            Player_AnimatorController playerAnim = collision.gameObject.GetComponent<Player_AnimatorController>();
+
+            // Se o player estiver dando o charge, o inimigo é destruído
+            if (playerCharge != null && playerCharge.isCharging)
+            {
+                Destroy(gameObject); // Opcional: Destrói o inimigo se levar o charge
+            }
+            // Se o player NÃO estiver em charge, ele morre
+            else if (playerAnim != null)
+            {
+                playerAnim.AnimDeath();
+            }
+        }
+    }
 }

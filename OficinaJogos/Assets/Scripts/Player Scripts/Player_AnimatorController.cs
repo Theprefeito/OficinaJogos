@@ -1,9 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player_AnimatorController : MonoBehaviour
 {
     private Animator animator;
     public bool tanoChao;
+    public bool isDead = false;
+
+
     public enum AnimState
     {
         Idle,
@@ -51,6 +55,7 @@ public class Player_AnimatorController : MonoBehaviour
 
     public void SetRunAnimationSpeed(float currentSpeed, float maxSpeed)
     {
+        if (isDead) return;
         float speedPercent = currentSpeed / maxSpeed;
         animator.speed = Mathf.Lerp(0.8f, 1.4f, speedPercent);
     }
@@ -76,5 +81,11 @@ public class Player_AnimatorController : MonoBehaviour
     }
 
 
+    public void AnimDeath()
+    {
+        isDead = true;
+        Destroy(gameObject);
+    }
 
+    
 }

@@ -10,6 +10,8 @@ public class Player_Charge : MonoBehaviour
 
     [Header("Configurações da Arrancada")]
     public float arrancadaDeceleration = 30f;
+    [Tooltip("Tag dos objetos que podem ser destruídos durante o Charge")]
+    public string destructibleTag = "Destructible"; // Tag configurável para os objetos que podem ser destruídos
 
     [Header("Ui")]
     public Slider chargeSlider;
@@ -23,10 +25,10 @@ public class Player_Charge : MonoBehaviour
     private CharacterController controller;
     private Player_AnimatorController animPlayer;
 
-    // Controle de Estados
+    [Header("Controle de Estados")]
     private Vector2 clickStartPosition;
     private bool isHoldingCharge = false;
-    private bool isCharging = false;
+    public bool isCharging = false;
 
     // Física Interna do Charge
     private Vector3 arrancadaDirection;
@@ -41,8 +43,8 @@ public class Player_Charge : MonoBehaviour
 
     void Update()
     {
-        HandleChargeInput(); //Botões do charge
-        FillChangeColor(); //Atualiza a cor do slider
+        HandleChargeInput(); // Botões do charge
+        FillChangeColor();   // Atualiza a cor do slider
 
         if (isCharging)
         {
@@ -51,7 +53,7 @@ public class Player_Charge : MonoBehaviour
 
         if (isHoldingCharge)
         {
-            chargeSlider.value = currentChargeForce;           
+            chargeSlider.value = currentChargeForce;
         }
         else
         {
@@ -76,7 +78,7 @@ public class Player_Charge : MonoBehaviour
             UpdateCharge(mouse.position.ReadValue());
         }
 
-        // ao soltar realiza a arrancada
+        // Ao soltar realiza a arrancada
         if (isHoldingCharge && mouse.leftButton.wasReleasedThisFrame)
         {
             ReleaseCharge();
@@ -143,7 +145,7 @@ public class Player_Charge : MonoBehaviour
     {
         isCharging = true;
 
-        // Devine a direção da arrancada
+        // Define a direção da arrancada
         arrancadaDirection = transform.forward * force;
 
         if (animPlayer != null)
@@ -157,13 +159,12 @@ public class Player_Charge : MonoBehaviour
         // Reduz a velocidade da arrancada gradualmente
         arrancadaDirection = Vector3.MoveTowards(arrancadaDirection, Vector3.zero, arrancadaDeceleration * Time.deltaTime);
 
-        // seta a velocidade da animação
+        // Seta a velocidade da animação
         if (animPlayer != null && movement != null)
         {
             animPlayer.SetRunAnimationSpeed(arrancadaDirection.magnitude, movement.maxSpeed);
         }
 
-        
         if (controller.isGrounded)
         {
             verticalVelocity = -2f;
@@ -177,9 +178,8 @@ public class Player_Charge : MonoBehaviour
         Vector3 finalMotion = arrancadaDirection + Vector3.up * verticalVelocity;
         controller.Move(finalMotion * Time.deltaTime);
 
-       
         float normalMaxSpeed = (movement != null) ? movement.maxSpeed : 8f;
-        if (arrancadaDirection.magnitude <= normalMaxSpeed) //se a velocidade da arrancada for menor que a velocidade normal do player, encerra o charge
+        if (arrancadaDirection.magnitude <= normalMaxSpeed) // Se a velocidade da arrancada for menor que a velocidade normal do player, encerra o charge
         {
             EndCharge();
         }
@@ -201,6 +201,32 @@ public class Player_Charge : MonoBehaviour
         if (sliderFillImage != null)
         {
             sliderFillImage.color = Color.Lerp(Color.green, Color.red, currentChargePercent);
+        }
+    }
+
+    // Chamado automaticamente pela Unity quando o CharacterController colide com algo durante o Move()
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        // Colisão com Objetos Destruíveis no Charge
+        if (isCharging && hit.gameObject.CompareTag(destructibleTag))
+        {
+            Destroy(hit.gameObject);
+        }
+
+        // Colisão com Inimigos
+        if (hit.gameObject.CompareTag("Enemy")) // Garanta que a tag do Inimigo no Inspector seja "Enemy"
+        {
+            if (isCharging)
+            {
+                Destroy(hit.gameObject); // Destrói o inimigo ao acertar o Charge
+            }
+            else
+            {
+                if (animPlayer != null)
+                {
+                    animPlayer.AnimDeath(); // Mata o jogador se colidir sem estar em Charge
+                }
+            }
         }
     }
 

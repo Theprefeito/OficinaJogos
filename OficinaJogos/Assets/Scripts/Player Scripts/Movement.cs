@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -64,7 +65,7 @@ public class Movement : MonoBehaviour
     {
         BasicMovement();
         Jump();
-
+        Die();
 
    
         
@@ -231,6 +232,16 @@ public class Movement : MonoBehaviour
         }
     }
     #endregion
+
+    private void Die()
+    {
+        if(animPlayer.isDead == true)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+   
 
     public bool IsSideFlipping() => isSideFlipping; // Método público para verificar se o personagem está realizando um side flip
 

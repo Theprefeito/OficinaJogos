@@ -21,5 +21,13 @@ public class EnemyBullet : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Player_AnimatorController playerAnimator = other.GetComponent<Player_AnimatorController>();
+            playerAnimator?.AnimDeath(); // Chama a animação de morte do jogador
+        }
+    }
+
 }
