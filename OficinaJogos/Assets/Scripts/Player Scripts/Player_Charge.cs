@@ -214,11 +214,23 @@ public class Player_Charge : MonoBehaviour
         }
 
         // Colisão com Inimigos
-        if (hit.gameObject.CompareTag("Enemy")) // Garanta que a tag do Inimigo no Inspector seja "Enemy"
+        if (hit.gameObject.CompareTag("Enemy"))
         {
             if (isCharging)
             {
-                Destroy(hit.gameObject); // Destrói o inimigo ao acertar o Charge
+                // Tenta pegar o script KeyEnemy do objeto colidido
+                KeyEnemy keyEnemy = hit.gameObject.GetComponent<KeyEnemy>();
+
+                if (keyEnemy != null)
+                {
+                    // Se tiver o script KeyEnemy, chama a função Die()
+                    keyEnemy.Die();
+                }
+                else
+                {
+                    // Se não tiver o script KeyEnemy, apenas destrói o objeto normalmente
+                    Destroy(hit.gameObject);
+                }
             }
             else
             {
