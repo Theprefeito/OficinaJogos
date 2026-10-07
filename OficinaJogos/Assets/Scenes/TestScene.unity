@@ -776,7 +776,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 971413af2cdc3894c82872084d00fcfa, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5515,10 +5515,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Player Cole\xE7\xE3o"
       objectReference: {fileID: 0}
+    - target: {fileID: 2623501970933783067, guid: 769dedc0b88ef7546bd7490e0724cb79, type: 3}
+      propertyPath: dashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 592e240c008d766489f73bf5053bcbf2, type: 3}
     - target: {fileID: 5097114263174324286, guid: 769dedc0b88ef7546bd7490e0724cb79, type: 3}
       propertyPath: particula
       value: 
       objectReference: {fileID: 7414083464143551204, guid: dc8c958d39b32cf44bc880637fa8d30d, type: 3}
+    - target: {fileID: 5539686811648170682, guid: 769dedc0b88ef7546bd7490e0724cb79, type: 3}
+      propertyPath: runSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 09c3c5c028088fe45a6e528638fcf0cf, type: 3}
+    - target: {fileID: 5539686811648170682, guid: 769dedc0b88ef7546bd7490e0724cb79, type: 3}
+      propertyPath: chargeSound
+      value: 
+      objectReference: {fileID: 8300000, guid: cfc121baf6e32024395e42a78877535b, type: 3}
     - target: {fileID: 5539686811648170682, guid: 769dedc0b88ef7546bd7490e0724cb79, type: 3}
       propertyPath: chargeSlider
       value: 

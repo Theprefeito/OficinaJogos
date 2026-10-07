@@ -6,6 +6,8 @@ public class PlayerDash : MonoBehaviour
 {
     [Header("Referências")]
     [SerializeField] private Transform cameraTransform;
+    public AudioClip dashSound;
+    private AudioSource audioSource;
 
     [Header("Configurações do Dash")]
     [SerializeField] private float dashSpeed = 25f;
@@ -24,6 +26,7 @@ public class PlayerDash : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
 
         if (controller == null)
         {
@@ -101,6 +104,7 @@ public class PlayerDash : MonoBehaviour
     private IEnumerator DashCoroutine()
     {
         float timer = 0f;
+        audioSource.PlayOneShot(dashSound);
 
         while (timer < dashDuration)
         {

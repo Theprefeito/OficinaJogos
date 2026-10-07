@@ -71,9 +71,12 @@ public class Movement : MonoBehaviour
         Jump();
         Die();
 
-   
-        
-    
+        if(transform.position.y < -40f) // Se o jogador cair abaixo de -10 no eixo Y, ele morre
+        {
+            animPlayer.isDead = true;
+        }
+
+
         Vector3 finalMotion = currentVelocity + Vector3.up * verticalVelocity;
         controller.Move(finalMotion * Time.deltaTime);
     }

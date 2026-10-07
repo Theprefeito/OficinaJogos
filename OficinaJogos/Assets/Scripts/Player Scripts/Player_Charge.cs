@@ -8,7 +8,11 @@ public class Player_Charge : MonoBehaviour
     public float maxPullDistance = 300f;
     public float maxChargeForce = 50f;
     private AudioSource audioSource;
+
+    [Header("Audio")]
     public AudioClip deathEnemyClip;
+    public AudioClip runSound;
+    public AudioClip chargeSound;
 
     [Header("Configurações da Arrancada")]
     public float arrancadaDeceleration = 30f;
@@ -72,6 +76,7 @@ public class Player_Charge : MonoBehaviour
         // Quando o botão esquerdo do mouse é pressionado, inicia o Charge
         if (mouse.leftButton.wasPressedThisFrame && animPlayer.currentState != Player_AnimatorController.AnimState.Jump)
         {
+            audioSource.PlayOneShot(chargeSound); // Toca o som de carregamento
             StartCharge(mouse.position.ReadValue());
         }
 
@@ -84,6 +89,7 @@ public class Player_Charge : MonoBehaviour
         // Ao soltar realiza a arrancada
         if (isHoldingCharge && mouse.leftButton.wasReleasedThisFrame)
         {
+            audioSource.Stop(); // Para o som de carregamento
             ReleaseCharge();
         }
     }
@@ -147,6 +153,7 @@ public class Player_Charge : MonoBehaviour
     private void StartArrancada(float force)
     {
         isCharging = true;
+        audioSource.PlayOneShot(runSound); // Toca o som de corrida
 
         // Define a direção da arrancada
         arrancadaDirection = transform.forward * force;
@@ -159,6 +166,8 @@ public class Player_Charge : MonoBehaviour
 
     private void UpdateArrancadaMovement()
     {
+        
+
         // Reduz a velocidade da arrancada gradualmente
         arrancadaDirection = Vector3.MoveTowards(arrancadaDirection, Vector3.zero, arrancadaDeceleration * Time.deltaTime);
 
@@ -191,6 +200,7 @@ public class Player_Charge : MonoBehaviour
     private void EndCharge()
     {
         isCharging = false;
+        audioSource.Stop(); // Para o som de corrida
 
         // Reativa o script Movement.cs para devolver o controle normal ao jogador
         if (movement != null)

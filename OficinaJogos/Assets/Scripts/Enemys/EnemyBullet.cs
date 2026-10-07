@@ -6,6 +6,7 @@ public class EnemyBullet : MonoBehaviour
     [SerializeField] private float speed = 20f;
     [SerializeField] private int damage = 10;
     [SerializeField] private float lifeTime = 5f;
+    //[SerializeField] private GameObject Player;
 
     private Rigidbody rb;
 
@@ -25,8 +26,7 @@ public class EnemyBullet : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Player_AnimatorController playerAnimator = other.GetComponent<Player_AnimatorController>();
-            playerAnimator?.AnimDeath(); // Chama a animação de morte do jogador
+            Destroy(other.gameObject);
         }
     }
 

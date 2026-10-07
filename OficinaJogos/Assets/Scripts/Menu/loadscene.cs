@@ -15,8 +15,8 @@ public class LoadScene : MonoBehaviour
    
     public void Load()
     {
-        GameManager.Instance.CarregarCenar(sceneName);
-        
+       GameManager.Instance.CarregarCena(sceneName);
+
     }
 
     public void EntrarSettings()
