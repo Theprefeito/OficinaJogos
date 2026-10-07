@@ -7,7 +7,7 @@ public class CannonEnemy : MonoBehaviour
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private GameObject bulletPrefab;
-    private float fireRate = 1f;
+    [SerializeField] private float fireRate = 1f;
     private SphereCollider sphereCollider;
     private Coroutine shootingCoroutine;
 

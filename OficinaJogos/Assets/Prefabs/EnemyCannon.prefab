@@ -46,9 +46,10 @@ GameObject:
   - component: {fileID: 8220696688966618053}
   - component: {fileID: 4204409351416681923}
   - component: {fileID: 2669701670988485377}
+  - component: {fileID: 8758676661603262376}
   m_Layer: 0
   m_Name: EnemyCannon
-  m_TagString: Destructible
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,6 +191,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   bulletSpawnPoint: {fileID: 895280259994134320}
   bulletPrefab: {fileID: 4810610625987153017, guid: 270e8a85a3540a6439f5a4f74e581daa, type: 3}
+  fireRate: 5
   cannonCurrentState: 0
 --- !u!135 &2669701670988485377
 SphereCollider:
@@ -210,5 +212,17 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8758676661603262376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6159263935590571268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590b5eff509e66c428c4406108894241, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeyEnemy
