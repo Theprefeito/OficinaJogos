@@ -9,6 +9,7 @@ TagManager:
   - Door
   - Destructible
   - Enemy
+  - AnimPlayer
   layers:
   - Default
   - TransparentFX
