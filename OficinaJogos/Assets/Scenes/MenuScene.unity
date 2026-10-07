@@ -5267,7 +5267,7 @@ MonoBehaviour:
   panelPrincipal: {fileID: 1215453490}
   panelSettings: {fileID: 287343734}
   panelCreditos: {fileID: 928891527}
-  sceneName: 0
+  sceneName: 1
 --- !u!1 &1741914671
 GameObject:
   m_ObjectHideFlags: 0

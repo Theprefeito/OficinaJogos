@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public AudioClip resetSound;
     private string targetTag = "Player";
     private AudioSource audioSource;
-    // Trava para evitar disparar múltiplos resests em fila
+    // Trava para evitar disparar mï¿½ltiplos resests em fila
     private bool isResetting = false;
 
     void Awake()
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     void CheckObjects()
     {
-        // Se já estiver em processo de reset, ignora a checagem
+        // Se jï¿½ estiver em processo de reset, ignora a checagem
         if (isResetting) return;
 
         // Busca objetos com a tag "Player"
@@ -46,9 +46,9 @@ public class GameManager : MonoBehaviour
 
         if (objectsFound.Length > 0)
         {
-            // Player está vivo na cena
+            // Player estï¿½ vivo na cena
         }
-        else if (SceneManager.GetActiveScene().buildIndex == 0) // Executa apenas se estiver na cena com buildIndex 0
+        else if (SceneManager.GetActiveScene().buildIndex == 1) // Executa apenas se estiver na cena com buildIndex 0
         {
             audioSource.PlayOneShot(resetSound);
             StartCoroutine(ResetScene());
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ResetScene()
     {
-        // Ativa a trava para o Update não chamar esta Corrotina novamente
+        // Ativa a trava para o Update nï¿½o chamar esta Corrotina novamente
         isResetting = true;
 
         yield return new WaitForSeconds(1f);
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         // Recarrega a cena atual
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-        // Aguarda 1 frame até que a nova cena seja totalmente carregada
+        // Aguarda 1 frame atï¿½ que a nova cena seja totalmente carregada
         yield return null;
 
         // Libera a trava para a nova cena
