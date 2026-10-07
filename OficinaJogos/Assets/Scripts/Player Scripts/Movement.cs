@@ -7,7 +7,9 @@ public class Movement : MonoBehaviour
 {
     [Header("Referências")]
     [SerializeField] private Transform cameraTransform;
+    private AudioSource audioSource;
     public bool isCharging = false;
+
 
     [Header("Configurações de Movimento")]
     public float maxSpeed = 8f;
@@ -27,7 +29,8 @@ public class Movement : MonoBehaviour
     public float sideFlipJumpForce = 11f;
     public float sideFlipBackwardForce = 5f;
     public float gravity = 20f;
-  
+    public AudioClip jumpClip;
+
     [Header("JumpBuffer")]
     public float bufferDistance;
     private float bufferCounter;
@@ -51,6 +54,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        audioSource = GetComponent<AudioSource>();
         if (cameraTransform == null)
         {
             cameraTransform = Camera.main.transform;
@@ -213,6 +217,7 @@ public class Movement : MonoBehaviour
         // Execução do Pulo
         if (bufferCounter > 0f && coyoteCounter > 0f) //Adicionado o jumpBuffer para só pular quando for maior que zero e o disparo ocorrer
         {
+            audioSource.PlayOneShot(jumpClip);
             if (derrapando)
             {
                 isSideFlipping = true;

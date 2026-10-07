@@ -7,6 +7,8 @@ public class Player_Charge : MonoBehaviour
     [Header("Configurações do Charge")]
     public float maxPullDistance = 300f;
     public float maxChargeForce = 50f;
+    private AudioSource audioSource;
+    public AudioClip deathEnemyClip;
 
     [Header("Configurações da Arrancada")]
     public float arrancadaDeceleration = 30f;
@@ -39,6 +41,7 @@ public class Player_Charge : MonoBehaviour
         movement = GetComponent<Movement>();
         controller = GetComponent<CharacterController>();
         animPlayer = FindAnyObjectByType<Player_AnimatorController>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -210,6 +213,7 @@ public class Player_Charge : MonoBehaviour
         // Colisão com Objetos Destruíveis no Charge
         if (isCharging && hit.gameObject.CompareTag(destructibleTag))
         {
+            audioSource.PlayOneShot(deathEnemyClip); // Toca o som de destruição
             Destroy(hit.gameObject);
         }
 
@@ -224,11 +228,13 @@ public class Player_Charge : MonoBehaviour
                 if (keyEnemy != null)
                 {
                     // Se tiver o script KeyEnemy, chama a função Die()
+                    audioSource.PlayOneShot(deathEnemyClip); // Toca o som de destruição
                     keyEnemy.Die();
                 }
                 else
                 {
                     // Se não tiver o script KeyEnemy, apenas destrói o objeto normalmente
+                    audioSource.PlayOneShot(deathEnemyClip); // Toca o som de destruição
                     Destroy(hit.gameObject);
                 }
             }
