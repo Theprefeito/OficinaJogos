@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         {
             // Player est� vivo na cena
         }
-        else if (SceneManager.GetActiveScene().buildIndex == 1) // Executa apenas se estiver na cena com buildIndex 0
+        else if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2 ) // Executa apenas se estiver na cena com buildIndex 0
         {
             audioSource.PlayOneShot(resetSound);
             StartCoroutine(ResetScene());

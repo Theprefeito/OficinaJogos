@@ -111,6 +111,7 @@ GameObject:
   - component: {fileID: 1697686349404652255}
   - component: {fileID: 4969064034567667955}
   - component: {fileID: 7662160155423181887}
+  - component: {fileID: 5829390107889258158}
   m_Layer: 0
   m_Name: EnemyPatrol
   m_TagString: Enemy
@@ -254,8 +255,31 @@ MonoBehaviour:
   wayIndex: 0
   distanceToWaypoint: 0
   speedEnemy: 0
+  target: {fileID: 0}
   enemyWaitTime: 0
   isWaiting: 0
+  seguindo: 0
+--- !u!135 &5829390107889258158
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3397251420661292061}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 7.34
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4188981693250613650
 GameObject:
   m_ObjectHideFlags: 0

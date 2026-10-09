@@ -12,10 +12,10 @@ public class PatrolEnemy : MonoBehaviour
     [SerializeField] public float distanceToWaypoint;
     [Header("Enemy Stats")]
     [SerializeField] public float speedEnemy;
-
+    [SerializeField] private Transform target;
     [SerializeField] public int enemyWaitTime;
     public bool isWaiting;
-
+    public bool seguindo;
     void Start()
     {
         rbEnemy = GetComponent<Rigidbody>();
@@ -63,6 +63,7 @@ public class PatrolEnemy : MonoBehaviour
             EnemyPatrolMovement();
             WaypointPatrol();
         }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -72,16 +73,17 @@ public class PatrolEnemy : MonoBehaviour
             Player_Charge playerCharge = collision.gameObject.GetComponent<Player_Charge>();
             Player_AnimatorController playerAnim = collision.gameObject.GetComponent<Player_AnimatorController>();
 
-            // Se o player estiver dando o charge, o inimigo é destruído
+            // Se o player estiver dando o charge, o inimigo ï¿½ destruï¿½do
             if (playerCharge != null && playerCharge.isCharging)
             {
-                Destroy(gameObject); // Opcional: Destrói o inimigo se levar o charge
+                Destroy(gameObject); // Opcional: Destrï¿½i o inimigo se levar o charge
             }
-            // Se o player NÃO estiver em charge, ele morre
+            // Se o player Nï¿½O estiver em charge, ele morre
             else if (playerAnim != null)
             {
                 playerAnim.AnimDeath();
             }
         }
     }
+    
 }
