@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class Player_Charge : MonoBehaviour
 {
-    [Header("Configurações do Charge")]
+    [Header("Configuraï¿½ï¿½es do Charge")]
     public float maxPullDistance = 300f;
     public float maxChargeForce = 50f;
     private AudioSource audioSource;
@@ -14,10 +14,10 @@ public class Player_Charge : MonoBehaviour
     public AudioClip runSound;
     public AudioClip chargeSound;
 
-    [Header("Configurações da Arrancada")]
+    [Header("Configuraï¿½ï¿½es da Arrancada")]
     public float arrancadaDeceleration = 30f;
-    [Tooltip("Tag dos objetos que podem ser destruídos durante o Charge")]
-    public string destructibleTag = "Destructible"; // Tag configurável para os objetos que podem ser destruídos
+    [Tooltip("Tag dos objetos que podem ser destruï¿½dos durante o Charge")]
+    public string destructibleTag = "Destructible"; // Tag configurï¿½vel para os objetos que podem ser destruï¿½dos
 
     [Header("Ui")]
     public Slider chargeSlider;
@@ -26,7 +26,7 @@ public class Player_Charge : MonoBehaviour
     private float currentChargePercent;
     private float currentChargeForce;
 
-    // Referências do GameObject
+    // Referï¿½ncias do GameObject
     private Movement movement;
     private CharacterController controller;
     private Player_AnimatorController animPlayer;
@@ -36,21 +36,28 @@ public class Player_Charge : MonoBehaviour
     private bool isHoldingCharge = false;
     public bool isCharging = false;
 
-    // Física Interna do Charge
+    // Fï¿½sica Interna do Charge
     private Vector3 arrancadaDirection;
     private float verticalVelocity = -2f;
 
+    //Outros scripts do player
+    private PlayerDash playerdash;
+    
+    
     void Start()
     {
         movement = GetComponent<Movement>();
         controller = GetComponent<CharacterController>();
         animPlayer = FindAnyObjectByType<Player_AnimatorController>();
         audioSource = GetComponent<AudioSource>();
+        
+        //Referencia ao script do Dash
+        playerdash = GetComponent<PlayerDash>();
     }
 
     void Update()
     {
-        HandleChargeInput(); // Botões do charge
+        HandleChargeInput(); // Botï¿½es do charge
         FillChangeColor();   // Atualiza a cor do slider
 
         if (isCharging)
@@ -60,10 +67,12 @@ public class Player_Charge : MonoBehaviour
 
         if (isHoldingCharge)
         {
+            playerdash.dontInCharger = false; //Acoplamento 1
             chargeSlider.value = currentChargeForce;
         }
         else
         {
+            playerdash.dontInCharger = true; //Acoplamento 1
             chargeSlider.value = 0f;
         }
     }
@@ -73,7 +82,7 @@ public class Player_Charge : MonoBehaviour
         var mouse = Mouse.current;
         if (mouse == null || isCharging) return;
 
-        // Quando o botão esquerdo do mouse é pressionado, inicia o Charge
+        // Quando o botï¿½o esquerdo do mouse ï¿½ pressionado, inicia o Charge
         if (mouse.leftButton.wasPressedThisFrame && animPlayer.currentState != Player_AnimatorController.AnimState.Jump)
         {
             audioSource.PlayOneShot(chargeSound); // Toca o som de carregamento
@@ -99,7 +108,7 @@ public class Player_Charge : MonoBehaviour
         isHoldingCharge = true;
         clickStartPosition = mousePos;
 
-        // Desativa o Movement.cs para congelar o input padrão sem mexer no código dele
+        // Desativa o Movement.cs para congelar o input padrï¿½o sem mexer no cï¿½digo dele
         if (movement != null) movement.enabled = false;
 
         // Libera o cursor para capturar o movimento do mouse na tela
@@ -120,7 +129,7 @@ public class Player_Charge : MonoBehaviour
         currentChargePercent = clampedPull / maxPullDistance;
         currentChargeForce = currentChargePercent * maxChargeForce;
 
-        // Mantém o player firme no chão enquanto carrega
+        // Mantï¿½m o player firme no chï¿½o enquanto carrega
         if (controller.isGrounded)
         {
             controller.Move(Vector3.down * 2f * Time.deltaTime);
@@ -131,11 +140,11 @@ public class Player_Charge : MonoBehaviour
     {
         isHoldingCharge = false;
 
-        // Trava o mouse de volta para o controle da câmera
+        // Trava o mouse de volta para o controle da cï¿½mera
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        // Só dispara se tiver carregado mais de 5%
+        // Sï¿½ dispara se tiver carregado mais de 5%
         if (currentChargePercent > 0.05f)
         {
             StartArrancada(currentChargeForce);
@@ -155,7 +164,7 @@ public class Player_Charge : MonoBehaviour
         isCharging = true;
         audioSource.PlayOneShot(runSound); // Toca o som de corrida
 
-        // Define a direção da arrancada
+        // Define a direï¿½ï¿½o da arrancada
         arrancadaDirection = transform.forward * force;
 
         if (animPlayer != null)
@@ -171,7 +180,7 @@ public class Player_Charge : MonoBehaviour
         // Reduz a velocidade da arrancada gradualmente
         arrancadaDirection = Vector3.MoveTowards(arrancadaDirection, Vector3.zero, arrancadaDeceleration * Time.deltaTime);
 
-        // Seta a velocidade da animação
+        // Seta a velocidade da animaï¿½ï¿½o
         if (animPlayer != null && movement != null)
         {
             animPlayer.SetRunAnimationSpeed(arrancadaDirection.magnitude, movement.maxSpeed);
@@ -220,14 +229,14 @@ public class Player_Charge : MonoBehaviour
     // Chamado automaticamente pela Unity quando o CharacterController colide com algo durante o Move()
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        // Colisão com Objetos Destruíveis no Charge
+        // Colisï¿½o com Objetos Destruï¿½veis no Charge
         if (isCharging && hit.gameObject.CompareTag(destructibleTag))
         {
-            audioSource.PlayOneShot(deathEnemyClip); // Toca o som de destruição
+            audioSource.PlayOneShot(deathEnemyClip); // Toca o som de destruiï¿½ï¿½o
             Destroy(hit.gameObject);
         }
 
-        // Colisão com Inimigos
+        // Colisï¿½o com Inimigos
         if (hit.gameObject.CompareTag("Enemy"))
         {
             if (isCharging)
@@ -237,14 +246,14 @@ public class Player_Charge : MonoBehaviour
 
                 if (keyEnemy != null)
                 {
-                    // Se tiver o script KeyEnemy, chama a função Die()
-                    audioSource.PlayOneShot(deathEnemyClip); // Toca o som de destruição
+                    // Se tiver o script KeyEnemy, chama a funï¿½ï¿½o Die()
+                    audioSource.PlayOneShot(deathEnemyClip); // Toca o som de destruiï¿½ï¿½o
                     keyEnemy.Die();
                 }
                 else
                 {
-                    // Se não tiver o script KeyEnemy, apenas destrói o objeto normalmente
-                    audioSource.PlayOneShot(deathEnemyClip); // Toca o som de destruição
+                    // Se nï¿½o tiver o script KeyEnemy, apenas destrï¿½i o objeto normalmente
+                    audioSource.PlayOneShot(deathEnemyClip); // Toca o som de destruiï¿½ï¿½o
                     Destroy(hit.gameObject);
                 }
             }
@@ -258,7 +267,7 @@ public class Player_Charge : MonoBehaviour
         }
     }
 
-    // Getters públicos
+    // Getters pï¿½blicos
     public float GetChargePercent() => currentChargePercent;
     public float GetChargeForce() => currentChargeForce;
     public bool IsCharging() => isHoldingCharge;

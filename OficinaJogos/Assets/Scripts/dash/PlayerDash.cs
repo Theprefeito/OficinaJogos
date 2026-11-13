@@ -19,8 +19,9 @@ public class PlayerDash : MonoBehaviour
     private Vector2 directionInput;
 
     private bool isDashing = false;
-    private bool canDash = true;
-
+    public bool canDash = true;
+    public bool dontInCharger; //Essa variavel esta com acoplamento
+    
     private Vector3 dashDirection;
 
     private void Start()
@@ -54,7 +55,11 @@ public class PlayerDash : MonoBehaviour
         if (!canDash || isDashing)
             return;
 
-        StartDash();
+        if (context.performed && dontInCharger)
+        {
+            StartDash();
+        }
+        
     }
 
     private void StartDash()
@@ -65,11 +70,7 @@ public class PlayerDash : MonoBehaviour
         // Verifica se o jogador está apertando alguma direção
         if (directionInput.magnitude > 0.1f)
         {
-            Vector3 direction = new Vector3(
-                directionInput.x,
-                0f,
-                directionInput.y
-            ).normalized;
+            Vector3 direction = new Vector3(directionInput.x, 0f, directionInput.y).normalized;
 
             // Direção baseada na câmera
             Vector3 cameraForward = cameraTransform.forward;
@@ -81,9 +82,7 @@ public class PlayerDash : MonoBehaviour
             cameraForward.Normalize();
             cameraRight.Normalize();
 
-            dashDirection =
-                cameraForward * direction.z +
-                cameraRight * direction.x;
+            dashDirection = cameraForward * direction.z + cameraRight * direction.x;
 
             dashDirection.Normalize();
         }
@@ -108,9 +107,7 @@ public class PlayerDash : MonoBehaviour
 
         while (timer < dashDuration)
         {
-            controller.Move(
-                dashDirection * dashSpeed * Time.deltaTime
-            );
+            controller.Move(dashDirection * dashSpeed * Time.deltaTime);
 
             timer += Time.deltaTime;
 
