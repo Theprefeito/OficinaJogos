@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using Unity.Cinemachine;
 public class PatrolEnemy : MonoBehaviour
 {
     Rigidbody rbEnemy;
@@ -16,10 +16,15 @@ public class PatrolEnemy : MonoBehaviour
     [SerializeField] public int enemyWaitTime;
     public bool isWaiting;
     public bool seguindo;
+    
+    
+    private CinemachineImpulseSource impulseSource;
     void Start()
     {
         rbEnemy = GetComponent<Rigidbody>();
         wayIndex = 0;
+        
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     void FixedUpdate()
@@ -76,7 +81,9 @@ public class PatrolEnemy : MonoBehaviour
             // Se o player estiver dando o charge, o inimigo � destru�do
             if (playerCharge != null && playerCharge.isCharging)
             {
-                Destroy(gameObject); // Opcional: Destr�i o inimigo se levar o charge
+             //   CameraShakeManager.Instance.TremerCam(impulseSource);
+              //  Destroy(gameObject); // Opcional: Destr�i o inimigo se levar o charge é Inutil essa parte
+               
             }
             // Se o player N�O estiver em charge, ele morre
             else if (playerAnim != null)

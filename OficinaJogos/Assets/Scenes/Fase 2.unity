@@ -1624,7 +1624,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -1721,7 +1721,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eec3f8fa92bcad4781d7e70da012ac6, type: 3}
   m_Name: 
@@ -3050,7 +3050,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2857339642545587256, guid: be7ff5eeb27a38844bd616b00d89fe29, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1946367278}
   m_SourcePrefab: {fileID: 100100000, guid: be7ff5eeb27a38844bd616b00d89fe29, type: 3}
 --- !u!1001 &560441489
 PrefabInstance:
@@ -7122,6 +7125,64 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84cf3646a704cb1489d543c098d49bce, type: 3}
+--- !u!1 &1946367276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2857339642545587256, guid: be7ff5eeb27a38844bd616b00d89fe29, type: 3}
+  m_PrefabInstance: {fileID: 560011193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1946367278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946367276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 2
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1001 &2003376045
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7591,7 +7652,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1704759327931775383, guid: 769dedc0b88ef7546bd7490e0724cb79, type: 3}
-      insertIndex: -1
+      insertIndex: 10
       addedObject: {fileID: 6473134113679531924}
   m_SourcePrefab: {fileID: 100100000, guid: 769dedc0b88ef7546bd7490e0724cb79, type: 3}
 --- !u!1 &6473134113679531923 stripped

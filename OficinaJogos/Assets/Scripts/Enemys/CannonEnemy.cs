@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+using Unity.Cinemachine;
 public class CannonEnemy : MonoBehaviour
 {
     [SerializeField] private bool playerNoCampoDeVisao;
@@ -10,6 +10,8 @@ public class CannonEnemy : MonoBehaviour
     [SerializeField] private float fireRate = 1f;
     private SphereCollider sphereCollider;
     private Coroutine shootingCoroutine;
+    
+  //  private CinemachineImpulseSource impulseSource;
 
     public enum CannonState
     {
@@ -25,6 +27,9 @@ public class CannonEnemy : MonoBehaviour
 
         playerNoCampoDeVisao = false;
         cannonCurrentState = CannonState.Idle;
+        
+        
+      //  impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     void Update()

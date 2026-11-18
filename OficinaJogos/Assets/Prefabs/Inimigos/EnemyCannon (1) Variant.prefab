@@ -74,13 +74,74 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1264307218303733419, guid: 568354b5beb281a44b046627c1644374, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6461014408916993155}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6159263935590571268, guid: 568354b5beb281a44b046627c1644374, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1761465235001429583}
   m_SourcePrefab: {fileID: 100100000, guid: 568354b5beb281a44b046627c1644374, type: 3}
 --- !u!4 &1146641478526335200 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1264307218303733419, guid: 568354b5beb281a44b046627c1644374, type: 3}
   m_PrefabInstance: {fileID: 2189322187515541067}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5411093663771962191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6159263935590571268, guid: 568354b5beb281a44b046627c1644374, type: 3}
+  m_PrefabInstance: {fileID: 2189322187515541067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1761465235001429583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5411093663771962191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineImpulseSource
+  ImpulseDefinition:
+    ImpulseChannel: 1
+    ImpulseShape: 2
+    CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    ImpulseDuration: 0.2
+    ImpulseType: 0
+    DissipationRate: 0.25
+    RawSignal: {fileID: 0}
+    AmplitudeGain: 1
+    FrequencyGain: 1
+    RepeatMode: 0
+    Randomize: 1
+    TimeEnvelope:
+      AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      AttackTime: 0
+      SustainTime: 0.2
+      DecayTime: 0.7
+      ScaleWithImpact: 1
+      HoldForever: 0
+    ImpactRadius: 100
+    DirectionMode: 0
+    DissipationMode: 2
+    DissipationDistance: 100
+    PropagationSpeed: 343
+  DefaultVelocity: {x: 0, y: -1, z: 0}
 --- !u!1001 &6782591609194210152
 PrefabInstance:
   m_ObjectHideFlags: 0

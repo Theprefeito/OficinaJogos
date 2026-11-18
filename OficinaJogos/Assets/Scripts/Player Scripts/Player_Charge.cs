@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -36,6 +37,8 @@ public class Player_Charge : MonoBehaviour
     private bool isHoldingCharge = false;
     public bool isCharging = false;
 
+    public bool dontInCharger;
+    
     // F�sica Interna do Charge
     private Vector3 arrancadaDirection;
     private float verticalVelocity = -2f;
@@ -43,7 +46,7 @@ public class Player_Charge : MonoBehaviour
     //Outros scripts do player
     private PlayerDash playerdash;
     
-    
+    private CinemachineImpulseSource impulseSource;
     void Start()
     {
         movement = GetComponent<Movement>();
@@ -53,6 +56,8 @@ public class Player_Charge : MonoBehaviour
         
         //Referencia ao script do Dash
         playerdash = GetComponent<PlayerDash>();
+        
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     void Update()
@@ -67,12 +72,12 @@ public class Player_Charge : MonoBehaviour
 
         if (isHoldingCharge)
         {
-            playerdash.dontInCharger = false; //Acoplamento 1
+            dontInCharger = false; //Acoplamento 1
             chargeSlider.value = currentChargeForce;
         }
         else
         {
-            playerdash.dontInCharger = true; //Acoplamento 1
+            dontInCharger = true; //Acoplamento 1
             chargeSlider.value = 0f;
         }
     }
@@ -239,6 +244,8 @@ public class Player_Charge : MonoBehaviour
         // Colis�o com Inimigos
         if (hit.gameObject.CompareTag("Enemy"))
         {
+            CameraShakeManager.Instance.TremerCam(impulseSource);
+            
             if (isCharging)
             {
                 // Tenta pegar o script KeyEnemy do objeto colidido
@@ -253,6 +260,7 @@ public class Player_Charge : MonoBehaviour
                 else
                 {
                     // Se n�o tiver o script KeyEnemy, apenas destr�i o objeto normalmente
+                    
                     audioSource.PlayOneShot(deathEnemyClip); // Toca o som de destrui��o
                     Destroy(hit.gameObject);
                 }

@@ -20,14 +20,20 @@ public class PlayerDash : MonoBehaviour
 
     private bool isDashing = false;
     public bool canDash = true;
-    public bool dontInCharger; //Essa variavel esta com acoplamento
+   
     
     private Vector3 dashDirection;
+    
+    
+    private Player_Charge playerCharge;
 
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         audioSource = GetComponent<AudioSource>();
+        
+        playerCharge = GetComponent<Player_Charge>();
+        
 
         if (controller == null)
         {
@@ -38,6 +44,9 @@ public class PlayerDash : MonoBehaviour
         {
             cameraTransform = Camera.main.transform;
         }
+        
+        
+        
     }
 
     // Recebe o movimento do Input System
@@ -55,7 +64,7 @@ public class PlayerDash : MonoBehaviour
         if (!canDash || isDashing)
             return;
 
-        if (context.performed && dontInCharger)
+        if (context.performed && playerCharge.dontInCharger)
         {
             StartDash();
         }
