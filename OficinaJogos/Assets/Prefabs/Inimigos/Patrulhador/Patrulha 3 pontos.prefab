@@ -66,11 +66,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7662160155423181887, guid: 0506ee61215af6e4bbd74ed6f133b8e5, type: 3}
       propertyPath: speedEnemy
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7662160155423181887, guid: 0506ee61215af6e4bbd74ed6f133b8e5, type: 3}
       propertyPath: enemyWaitTime
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7662160155423181887, guid: 0506ee61215af6e4bbd74ed6f133b8e5, type: 3}
       propertyPath: distanceToWaypoint
