@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Unity.Cinemachine;
+
 public class PatrolEnemy : MonoBehaviour
 {
     Rigidbody rbEnemy;
@@ -14,16 +15,17 @@ public class PatrolEnemy : MonoBehaviour
     [SerializeField] public float speedEnemy;
     [SerializeField] private Transform target;
     [SerializeField] public int enemyWaitTime;
+    [SerializeField] private int contactDamage = 1;
     public bool isWaiting;
     public bool seguindo;
-    
-    
+
     private CinemachineImpulseSource impulseSource;
+
     void Start()
     {
         rbEnemy = GetComponent<Rigidbody>();
         wayIndex = 0;
-        
+
         impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
@@ -68,29 +70,19 @@ public class PatrolEnemy : MonoBehaviour
             EnemyPatrolMovement();
             WaypointPatrol();
         }
-        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Player_Charge playerCharge = collision.gameObject.GetComponent<Player_Charge>();
-            Player_AnimatorController playerAnim = collision.gameObject.GetComponent<Player_AnimatorController>();
+        if (!collision.gameObject.CompareTag("Player")) return;
 
-            // Se o player estiver dando o charge, o inimigo � destru�do
-            if (playerCharge != null && playerCharge.isCharging)
-            {
-             //   CameraShakeManager.Instance.TremerCam(impulseSource);
-              //  Destroy(gameObject); // Opcional: Destr�i o inimigo se levar o charge é Inutil essa parte
-               
-            }
-            // Se o player N�O estiver em charge, ele morre
-            else if (playerAnim != null)
-            {
-                playerAnim.AnimDeath();
-            }
+        PlayerHealth health = collision.gameObject.GetComponentInParent<PlayerHealth>();
+
+        // Se o player estiver em Charge (invulnerável), o TakeDamage é bloqueado automaticamente.
+        // Não precisa mais checar isCharging aqui.
+        if (health != null)
+        {
+            health.TakeDamage(contactDamage, gameObject);
         }
     }
-    
 }

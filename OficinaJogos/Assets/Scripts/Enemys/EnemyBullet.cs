@@ -4,9 +4,8 @@ public class EnemyBullet : MonoBehaviour
 {
     [Header("Configurações da Bala")]
     [SerializeField] private float speed = 20f;
-    [SerializeField] private int damage = 10;
+    [SerializeField] private int damage = 1;
     [SerializeField] private float lifeTime = 5f;
-    //[SerializeField] private GameObject Player;
 
     private Rigidbody rb;
 
@@ -24,10 +23,18 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Destroy(other.gameObject);
-        }
-    }
+        if (!other.CompareTag("Player")) return;
 
+        // A vida pode estar no objeto pai do collider que foi atingido
+        PlayerHealth health = other.GetComponentInParent<PlayerHealth>();
+
+        // Se o player estiver invulnerável (ex.: Charge), o TakeDamage bloqueia sozinho
+        if (health != null)
+        {
+            health.TakeDamage(damage, gameObject);
+        }
+
+        // A bala some em qualquer caso
+        Destroy(gameObject);
+    }
 }

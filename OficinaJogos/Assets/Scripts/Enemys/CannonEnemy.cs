@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using Unity.Cinemachine;
+
 public class CannonEnemy : MonoBehaviour
 {
     [SerializeField] private bool playerNoCampoDeVisao;
@@ -8,10 +8,11 @@ public class CannonEnemy : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPoint;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float fireRate = 1f;
-    private SphereCollider sphereCollider;
+    [SerializeField] private float forgetPlayerDelay = 3f;
+
     private Coroutine shootingCoroutine;
-    
-  //  private CinemachineImpulseSource impulseSource;
+    private Coroutine forgetCoroutine;
+    private PlayerHealth playerHealth;
 
     public enum CannonState
     {
@@ -23,18 +24,18 @@ public class CannonEnemy : MonoBehaviour
 
     void Start()
     {
-        sphereCollider = GetComponent<SphereCollider>();
-
         playerNoCampoDeVisao = false;
         cannonCurrentState = CannonState.Idle;
-        
-        
-      //  impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     void Update()
     {
         Attack();
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeFromPlayer();
     }
 
     void Attack()
@@ -44,7 +45,7 @@ public class CannonEnemy : MonoBehaviour
             cannonCurrentState = CannonState.TrackingPlayer;
         }
 
-        if (cannonCurrentState == CannonState.TrackingPlayer)
+        if (cannonCurrentState == CannonState.TrackingPlayer && playerTransform != null)
         {
             // Olha para o Player
             transform.LookAt(playerTransform);
@@ -59,35 +60,82 @@ public class CannonEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player")) return;
+
+        PlayerHealth health = other.GetComponentInParent<PlayerHealth>();
+        if (health != null && health.IsDead) return; // não mira em player morto
+
+        // Se o player voltou antes dos 3s, cancela o "esquecer"
+        if (forgetCoroutine != null)
         {
-            playerNoCampoDeVisao = true;
-            playerTransform = other.transform;
+            StopCoroutine(forgetCoroutine);
+            forgetCoroutine = null;
         }
+
+        playerNoCampoDeVisao = true;
+        playerTransform = other.transform;
+
+        SubscribeToPlayer(health);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            playerNoCampoDeVisao = false;
+        if (!other.CompareTag("Player")) return;
 
-            StartCoroutine(ForgetPlayer());
-        }
+        playerNoCampoDeVisao = false;
+
+        if (forgetCoroutine != null) StopCoroutine(forgetCoroutine);
+        forgetCoroutine = StartCoroutine(ForgetPlayer());
     }
 
-    IEnumerator ForgetPlayer()
+    // ---------- Integração com a vida do player ----------
+    private void SubscribeToPlayer(PlayerHealth health)
     {
-        yield return new WaitForSeconds(3f);
+        if (health == playerHealth) return;
 
+        UnsubscribeFromPlayer();
+        playerHealth = health;
+
+        if (playerHealth != null) playerHealth.Died += OnPlayerDied;
+    }
+
+    private void UnsubscribeFromPlayer()
+    {
+        if (playerHealth != null) playerHealth.Died -= OnPlayerDied;
+        playerHealth = null;
+    }
+
+    private void OnPlayerDied()
+    {
+        // Para de mirar e atirar assim que o player morre
+        playerNoCampoDeVisao = false;
+
+        if (forgetCoroutine != null)
+        {
+            StopCoroutine(forgetCoroutine);
+            forgetCoroutine = null;
+        }
+
+        StopTracking();
+    }
+
+    private void StopTracking()
+    {
         cannonCurrentState = CannonState.Idle;
 
-        // Para a Coroutine de tiro
         if (shootingCoroutine != null)
         {
             StopCoroutine(shootingCoroutine);
             shootingCoroutine = null;
         }
+    }
+
+    IEnumerator ForgetPlayer()
+    {
+        yield return new WaitForSeconds(forgetPlayerDelay);
+
+        StopTracking();
+        forgetCoroutine = null;
     }
 
     IEnumerator SpawnBullet()
