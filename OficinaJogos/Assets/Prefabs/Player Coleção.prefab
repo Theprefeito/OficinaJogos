@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 358297084794918435}
   - component: {fileID: 2623501970933783067}
   - component: {fileID: 7116457358533909484}
+  - component: {fileID: 1457629812442795544}
+  - component: {fileID: 155772774530839640}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -407,6 +409,34 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: -1, z: 0}
+--- !u!114 &1457629812442795544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704759327931775383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e8d73e551362d4fbe8e07b324a7fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 1
+  onDied:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &155772774530839640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704759327931775383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a703c3d46e84eb4688b50eb2090177d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeathHandler
 --- !u!1 &2529458233404518784
 GameObject:
   m_ObjectHideFlags: 0
